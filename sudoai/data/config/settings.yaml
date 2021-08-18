@@ -1,0 +1,9 @@
+client_config_backend: settings
+client_config:
+  client_id: 468040074449-cgcr6mhmep9845vol8fje2suv47k261c.apps.googleusercontent.com
+  client_secret: n2pN4QjWWxMNaTfFkgaRbzWF
+
+oauth_scope:
+  - https://www.googleapis.com/auth/drive
+  - https://www.googleapis.com/auth/drive.file
+  - https://www.googleapis.com/auth/drive.install

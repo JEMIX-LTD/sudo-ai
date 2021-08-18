@@ -1,0 +1,1368 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Dataset" href="sudoai.dataset.html" /><link rel="prev" title="sudoai package" href="sudoai.html" />
+
+    <meta name="generator" content="sphinx-4.0.3, furo 2021.07.05.beta38"/>
+        <title>Preprocess - SUDOAI 0.1.2-alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css" />
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">SUDOAI 0.1.2-alpha documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">SUDOAI 0.1.2-alpha documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">sudo-ai</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="sudoai.html">sudoai package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Preprocess</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.dataset.html">Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.models.html">Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.hypertuning.html">Hypertuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.trainer.html">Trainer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.social.html">Social</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="preprocess">
+<h1>Preprocess<a class="headerlink" href="#preprocess" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-sudoai.preprocess">
+<span id="module-content"></span><h2>Module Content<a class="headerlink" href="#module-sudoai.preprocess" title="Permalink to this headline">¶</a></h2>
+<p>Preprocess.Text module
+@author: Aymen Jemi (jemix) &lt;<a class="reference external" href="mailto:jemiaymen%40gmail.com">jemiaymen<span>@</span>gmail<span>.</span>com</a>&gt; at SUDO-AI</p>
+<p>Preprocessing for natural language processing, sudoai.preprocess
+is a lightweight library to clean and tokenize text.</p>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use sudoai Preprocess module.</p>
+<p>Create and save CharTokenizer:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">CharTokenizer</span><span class="p">(</span><span class="n">strip_duplicated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"data.txt"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'id_chartokenizer'</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">train chartokenizer: 67534 lines [00:00, 79429.67 lines/s]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="p">(</span><span class="s1">'winek'</span><span class="p">)</span>
+<span class="go">tensor([[ 2],</span>
+<span class="go">        [53],</span>
+<span class="go">        [20],</span>
+<span class="go">        [59],</span>
+<span class="go">        [18]], device='cuda:0')</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">en</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'winek'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">en</span><span class="p">)</span>
+<span class="go">['w', 'i', 'n', 'e', 'k']</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">BasicTokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_vocab_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_duplicated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_punc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_stop_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopword</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.text.StopWord"><span class="pre">sudoai.preprocess.text.StopWord</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class sudoai.preprocess.BasicTokenizer representing a Tokenizer.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.lower_case">
+<span class="sig-name descname"><span class="pre">lower_case</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.lower_case" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True lower case text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.duplicated">
+<span class="sig-name descname"><span class="pre">duplicated</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.duplicated" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True clean text from duplicated characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.punc">
+<span class="sig-name descname"><span class="pre">punc</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.punc" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True clean text form punctuations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.max_size">
+<span class="sig-name descname"><span class="pre">max_size</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.max_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum vocabulary size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.vocab_size">
+<span class="sig-name descname"><span class="pre">vocab_size</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.vocab_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vocabulary size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.vocab">
+<span class="sig-name descname"><span class="pre">vocab</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.vocab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vocaburaly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>set(str)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.words_freq">
+<span class="sig-name descname"><span class="pre">words_freq</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.words_freq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Words frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Counter</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.strip_stopword">
+<span class="sig-name descname"><span class="pre">strip_stopword</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.strip_stopword" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True clean text from stopwords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.stopword">
+<span class="sig-name descname"><span class="pre">stopword</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.stopword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stopword class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.StopWord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StopWord</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.w2i">
+<span class="sig-name descname"><span class="pre">w2i</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.w2i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of word to index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict(str, int)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.i2w">
+<span class="sig-name descname"><span class="pre">i2w</span></span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.i2w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of index to word.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict(int, str)</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you set stip_stop_words True you should set stopword, if not
+an Exception raised.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.decode">
+<span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode ids to text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ids</strong> (<em>list</em>) – Input ids.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Output words.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode text to ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input text line.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sudoai.preprocess.NotTrainedError" title="sudoai.preprocess.NotTrainedError"><strong>NotTrainedError</strong></a> – When tokenizer not trained yet.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>ids.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.from_pretrain">
+<span class="sig-name descname"><span class="pre">from_pretrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vocab_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">words_freq</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.from_pretrain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load tokenizer from saved vocab file and words frequency file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vocab_file</strong> (<em>str</em>) – Path of vocabulary file.</p></li>
+<li><p><strong>words_freq</strong> (<em>str</em>) – Path of words frequency file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileExistsError</strong> – When vocabulary file not exist.</p></li>
+<li><p><strong>FileExistsError</strong> – When words frequency file not exist.</p></li>
+<li><p><strong>ValueError</strong> – When words frequency file is corrupted.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load saved tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – Unique id of tokenizer.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tokenizer .</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>Tokenizer</cite></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save Tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – Unique id of tokenizer.</p></li>
+<li><p><strong>override</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True erase old tokenizer file. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When tokenizer file is exist and override is False.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tokenizer saved or not.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.save_pretrain">
+<span class="sig-name descname"><span class="pre">save_pretrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vocab_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">words_freq</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.save_pretrain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save vocabulary file and words frequency file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vocab_file</strong> (<em>str</em>) – Path of vocabulary file.</p></li>
+<li><p><strong>words_freq</strong> (<em>str</em>) – Path of words frequency file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.split_on_punc">
+<span class="sig-name descname"><span class="pre">split_on_punc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.split_on_punc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits punctuation on a piece of text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tokens.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tokenize text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input text line.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tokens.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paths</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train current Tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path of text data. Defaults to None.</p></li>
+<li><p><strong>paths</strong> (<em>list</em><em>, </em><em>optional</em>) – Paths of text data. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Split text into small pieces of text it’s take less time.
+Big file always take more time then small pieces of file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – When path and paths is both None.</p></li>
+<li><p><strong>TypeError</strong> – When path or paths is wrong type.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.BasicTokenizer.word_frequency">
+<span class="sig-name descname"><span class="pre">word_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_freq</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">collections.Counter</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.BasicTokenizer.word_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get word frequency from text file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path of text data.</p></li>
+<li><p><strong>word_freq</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Counter</span></code>, optional) – Old Counter to update it with new Counter. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When data file not exist.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Words frequency.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Counter</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">CharTokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_duplicated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_clean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopword</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.text.StopWord"><span class="pre">sudoai.preprocess.text.StopWord</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Char Tokenizer class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.lower_case">
+<span class="sig-name descname"><span class="pre">lower_case</span></span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.lower_case" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True lower case text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.duplicated">
+<span class="sig-name descname"><span class="pre">duplicated</span></span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.duplicated" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True clean text from duplicated characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.stopword">
+<span class="sig-name descname"><span class="pre">stopword</span></span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.stopword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stopword class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.StopWord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StopWord</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True clean data text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.c2i">
+<span class="sig-name descname"><span class="pre">c2i</span></span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.c2i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of character to index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict(str, int)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.i2c">
+<span class="sig-name descname"><span class="pre">i2c</span></span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.i2c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of index to character.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict(int, str)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.vocab_size">
+<span class="sig-name descname"><span class="pre">vocab_size</span></span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.vocab_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vocabulary size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.vocab">
+<span class="sig-name descname"><span class="pre">vocab</span></span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.vocab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vocaburaly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>set(str)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer._check_vocab">
+<span class="sig-name descname"><span class="pre">_check_vocab</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer._check_vocab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check vocabulary and fix error if exists.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.chars">
+<span class="sig-name descname"><span class="pre">chars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.chars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get unique characters from file and update current vocab.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path of text data.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.decode">
+<span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode ids to characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ids</strong> (<em>list</em>) – Input ids.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Output characters.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode text to ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input text.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sudoai.preprocess.NotTrainedError" title="sudoai.preprocess.NotTrainedError"><strong>NotTrainedError</strong></a> – When tokenizer not trained yet.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>ids.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.from_pretrain">
+<span class="sig-name descname"><span class="pre">from_pretrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vocab_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.from_pretrain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load character tokenizer from saved vocab file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vocab_file</strong> (<em>str</em>) – Path of vocabulary file.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When vocabulary file not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_duplicated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_clean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopword</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.text.StopWord"><span class="pre">sudoai.preprocess.text.StopWord</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reinit attributes of CharTokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>do_lower_case</strong> (<em>bool</em>) – If True lower case text.</p></li>
+<li><p><strong>strip_duplicated</strong> (<em>bool</em>) – If True clean text from duplicated characters.</p></li>
+<li><p><strong>do_clean</strong> (<em>bool</em>) – If True clean text.</p></li>
+<li><p><strong>stopword</strong> (<a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.StopWord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StopWord</span></code></a>) – Stopword class.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load saved character tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – Unique id of tokenizer.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Character tokenizer .</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.preprocess.CharTokenizer" title="sudoai.preprocess.CharTokenizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CharTokenizer</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save CharTokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – Unique id of tokenizer.</p></li>
+<li><p><strong>override</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True erase old tokenizer file. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When tokenizer file is exist and override is False.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tokenizer saved or not.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.save_pretrain">
+<span class="sig-name descname"><span class="pre">save_pretrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vocab_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.save_pretrain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save vocabulary file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vocab_file</strong> (<em>str</em>) – Path of vocabulary file.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">list</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Character tokenize text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input text.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tokens</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.CharTokenizer.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paths</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.CharTokenizer.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train character tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path of text data. Defaults to None.</p></li>
+<li><p><strong>paths</strong> (<em>list</em><em>, </em><em>optional</em>) – Paths of text data. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – When path and paths both are None.</p></li>
+<li><p><strong>TypeError</strong> – When path or paths is wrong type.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="sudoai.preprocess.InputTypeError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">InputTypeError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_or_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Is</span> <span class="pre">not</span> <span class="pre">str</span> <span class="pre">or</span> <span class="pre">list</span> <span class="pre">.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.InputTypeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised for errors in the input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str_or_list</strong> (<em>str | list</em>) – input str_or_list which caused the error.</p></li>
+<li><p><strong>message</strong> (<em>str</em><em>, </em><em>optinal</em>) – Human readable string describing the exception. Defaults to ‘Is not str or list’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.InputTypeError.str_or_list">
+<span class="sig-name descname"><span class="pre">str_or_list</span></span><a class="headerlink" href="#sudoai.preprocess.InputTypeError.str_or_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>input str_or_list which caused the error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str | list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.InputTypeError.message">
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#sudoai.preprocess.InputTypeError.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human readable string describing the exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.InputTypeError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#sudoai.preprocess.InputTypeError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.InputTypeError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.InputTypeError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="sudoai.preprocess.NotTrainedError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">NotTrainedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Is</span> <span class="pre">not</span> <span class="pre">trained</span> <span class="pre">yet'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.NotTrainedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised when tokenizer not trained yet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<a class="reference internal" href="#sudoai.preprocess.BasicTokenizer" title="sudoai.preprocess.BasicTokenizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BasicTokenizer</span></code></a>) – </p></li>
+<li><p><strong>message</strong> (<em>str</em><em>, </em><em>optinal</em>) – Human readable string describing the exception. Defaults to ‘Is not trained yet’</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.NotTrainedError.obj">
+<span class="sig-name descname"><span class="pre">obj</span></span><a class="headerlink" href="#sudoai.preprocess.NotTrainedError.obj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.preprocess.BasicTokenizer" title="sudoai.preprocess.BasicTokenizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BasicTokenizer</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.NotTrainedError.message">
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#sudoai.preprocess.NotTrainedError.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human readable string describing the exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.NotTrainedError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#sudoai.preprocess.NotTrainedError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.NotTrainedError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.NotTrainedError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.preprocess.PrefixSuffix">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">PrefixSuffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['ب',</span> <span class="pre">'ك',</span> <span class="pre">'س',</span> <span class="pre">'و',</span> <span class="pre">'ال',</span> <span class="pre">'أ',</span> <span class="pre">'ف',</span> <span class="pre">'ل']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['ين',</span> <span class="pre">'ان',</span> <span class="pre">'و',</span> <span class="pre">'ه',</span> <span class="pre">'ك',</span> <span class="pre">'ا',</span> <span class="pre">'ي',</span> <span class="pre">'ن',</span> <span class="pre">'ت',</span> <span class="pre">'ات',</span> <span class="pre">'ون',</span> <span class="pre">'وا',</span> <span class="pre">'تم',</span> <span class="pre">'هم',</span> <span class="pre">'كم']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.PrefixSuffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Detect Prefix and Suffix .</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.PrefixSuffix.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><a class="headerlink" href="#sudoai.preprocess.PrefixSuffix.suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of all suffix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list(str)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.PrefixSuffix.prefix">
+<span class="sig-name descname"><span class="pre">prefix</span></span><a class="headerlink" href="#sudoai.preprocess.PrefixSuffix.prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of all prefix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list(str)</p>
+</dd>
+</dl>
+</dd></dl>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use PrefixSuffix class.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clean</span> <span class="o">=</span> <span class="n">PrefixSuffix</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean</span><span class="p">(</span><span class="s1">'الهدف'</span><span class="p">)</span>
+<span class="go">['##ال', 'هدف']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean</span><span class="p">(</span><span class="s1">'نمتم'</span><span class="p">)</span>
+<span class="go">['نم', 'تم##']</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.PrefixSuffix.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.PrefixSuffix.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Prefix and Suffix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>str</em>) – Input token.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List with prefix (if exist) and suffix (if exist) and base.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list(str)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.preprocess.StopWord">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">StopWord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.StopWord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>StopWord class to escape stopwords.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.StopWord.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#sudoai.preprocess.StopWord.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of stopwords file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.StopWord.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sudoai.preprocess.StopWord.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stopwords file id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.StopWord.words">
+<span class="sig-name descname"><span class="pre">words</span></span><a class="headerlink" href="#sudoai.preprocess.StopWord.words" title="Permalink to this definition">¶</a></dt>
+<dd><p>All stopwords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>set(str)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.StopWord.is_stopword">
+<span class="sig-name descname"><span class="pre">is_stopword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="headerlink" href="#sudoai.preprocess.StopWord.is_stopword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if word is a stopword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>word</strong> (<em>str</em>) – Input word.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use StopWord class.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sw</span> <span class="o">=</span> <span class="n">StopWord</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">'../data/ttd/src.txt'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sw</span><span class="p">(</span><span class="s1">'alik'</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sw</span><span class="o">.</span><span class="n">is_stopword</span><span class="p">(</span><span class="s1">'not'</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Result if is stopword or not.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.StopWord.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.StopWord.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load stopwords with path or id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – When stopwords file not found.</p></li>
+<li><p><strong>FileNotFoundError</strong> – When stopwords id is wrong.</p></li>
+<li><p><strong>Exception</strong> – When stopwords path is None and id is None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">WordTokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_vocab_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_duplicated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trip_punc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_stop_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopword</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.text.StopWord"><span class="pre">sudoai.preprocess.text.StopWord</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Word Tokenizer class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.basic">
+<span class="sig-name descname"><span class="pre">basic</span></span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.basic" title="Permalink to this definition">¶</a></dt>
+<dd><p>BasicTokenizer class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.preprocess.BasicTokenizer" title="sudoai.preprocess.BasicTokenizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BasicTokenizer</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.prefix_suffix">
+<span class="sig-name descname"><span class="pre">prefix_suffix</span></span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.prefix_suffix" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.preprocess.PrefixSuffix" title="sudoai.preprocess.PrefixSuffix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PrefixSuffix</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.decode">
+<span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode ids to text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ids</strong> (<em>list</em>) – Input ids.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Output words.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode text to ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input text line.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sudoai.preprocess.NotTrainedError" title="sudoai.preprocess.NotTrainedError"><strong>NotTrainedError</strong></a> – When tokenizer not trained yet.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>ids.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.from_pretrain">
+<span class="sig-name descname"><span class="pre">from_pretrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vocab_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">words_freq</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.from_pretrain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load tokenizer from saved vocab file and words frequency file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vocab_file</strong> (<em>str</em>) – Path of vocabulary file.</p></li>
+<li><p><strong>words_freq</strong> (<em>str</em>) – Path of words frequency file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileExistsError</strong> – When vocabulary file not exist.</p></li>
+<li><p><strong>FileExistsError</strong> – When words frequency file not exist.</p></li>
+<li><p><strong>ValueError</strong> – When words frequency file is corrupted.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_duplicated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_punc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopword</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.text.StopWord"><span class="pre">sudoai.preprocess.text.StopWord</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reinit attributes of WordTokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>do_lower_case</strong> (<em>bool</em>) – If True lower case text.</p></li>
+<li><p><strong>strip_duplicated</strong> (<em>bool</em>) – If True clean text from duplicated characters.</p></li>
+<li><p><strong>strip_punc</strong> (<em>bool</em>) – If True clean text form punctuations.</p></li>
+<li><p><strong>stopword</strong> (<a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.StopWord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StopWord</span></code></a>) – Stopword class.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load saved word tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – Unique id of tokenizer.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Word tokenizer .</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.preprocess.WordTokenizer" title="sudoai.preprocess.WordTokenizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WordTokenizer</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save WordTokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – Unique id of tokenizer.</p></li>
+<li><p><strong>override</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True erase old tokenizer file. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When tokenizer file is exist and override is False.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tokenizer saved or not.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.save_pretrain">
+<span class="sig-name descname"><span class="pre">save_pretrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vocab_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">words_freq</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.save_pretrain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save vocabulary file and words frequency file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vocab_file</strong> (<em>str</em>) – Path of vocabulary file.</p></li>
+<li><p><strong>words_freq</strong> (<em>str</em>) – Path of words frequency file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tokenize text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input text line.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tokens.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.preprocess.WordTokenizer.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paths</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.WordTokenizer.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train current Tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path of text data. Defaults to None.</p></li>
+<li><p><strong>paths</strong> (<em>list</em><em>, </em><em>optional</em>) – Paths of text data. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.clean_text">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">clean_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#sudoai.preprocess.clean_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input text.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Clean text.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.convert_to_unicode">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">convert_to_unicode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.convert_to_unicode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert input to unicode text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str | bytes</em>) – Input data.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – When input text is not in (str, bytes)</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Unicode text.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.strip_accents">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">strip_accents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#sudoai.preprocess.strip_accents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean text from accents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input data text.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Output text cleaned from accents.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.strip_duplicated_letter">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">strip_duplicated_letter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.strip_duplicated_letter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean text from duplicated lettre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – Input data text.</p></li>
+<li><p><strong>tokens</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True return tokens not str. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use strip_duplicated_lettre().</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">strip_duplicated_letter</span><span class="p">(</span><span class="s1">'helllllo word'</span><span class="p">)</span>
+<span class="go">'hello word'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">strip_duplicated_letter</span><span class="p">(</span><span class="s1">'hellllllllo dude'</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">['hello', 'dude']</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tokens.
+str: Output clean data from duplicated lettre.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.strip_punc">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">strip_punc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#sudoai.preprocess.strip_punc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean text from punctuation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input data text.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Output text cleaned from punctuation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.unique_chars">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">unique_chars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.unique_chars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get unique characters from data file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path of text data.</p></li>
+<li><p><strong>do_lower_case</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True lower case text. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When data file not exist.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Unique characters.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>set(str)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.unique_words">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">unique_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_duplicated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopword</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.text.StopWord"><span class="pre">sudoai.preprocess.text.StopWord</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">set</span><a class="headerlink" href="#sudoai.preprocess.unique_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get unique words from text file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path of text data.</p></li>
+<li><p><strong>clean</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True clean text. Defaults to False.</p></li>
+<li><p><strong>do_lower_case</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True lower case text. Defaults to True.</p></li>
+<li><p><strong>strip_duplicated</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True clean text from duplicated characters. Defaults to False.</p></li>
+<li><p><strong>stopword</strong> (<a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.StopWord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StopWord</span></code></a>, optional) – StopWord class to escape stopwords . Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When text file not exist.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Unique words.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.unique_words_with_pattern">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">unique_words_with_pattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'[a-z0-9]+'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_duplicated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopword</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.preprocess.unique_words_with_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.whitespace_tokenize">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">whitespace_tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">list</span><a class="headerlink" href="#sudoai.preprocess.whitespace_tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tokenizer text with spaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Input data text.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Output tokens.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.preprocess.word_frequency">
+<span class="sig-prename descclassname"><span class="pre">sudoai.preprocess.</span></span><span class="sig-name descname"><span class="pre">word_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_freq</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">collections.Counter</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_lower_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip_duplicated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopword</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.text.StopWord"><span class="pre">sudoai.preprocess.text.StopWord</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">collections.Counter</span><a class="headerlink" href="#sudoai.preprocess.word_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get word frequency from text file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path of text data.</p></li>
+<li><p><strong>word_freq</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Counter</span></code>, optional) – Old Counter to update it with new Counter. Defaults to None.</p></li>
+<li><p><strong>do_lower_case</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True lower case text. Defaults to True.</p></li>
+<li><p><strong>clean</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True clean text. Defaults to False.</p></li>
+<li><p><strong>strip_duplicated</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True clean text from duplicated characters. Defaults to False.</p></li>
+<li><p><strong>stopword</strong> (<a class="reference internal" href="#sudoai.preprocess.StopWord" title="sudoai.preprocess.StopWord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StopWord</span></code></a>, optional) – StopWord class to escape stopwords . Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When data file not exist.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Words frequency.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Counter</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="sudoai.dataset.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Dataset</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="sudoai.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">sudoai package</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Preprocess</a><ul>
+<li><a class="reference internal" href="#module-sudoai.preprocess">Module Content</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    </body>
+</html>

@@ -1,0 +1,616 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Social" href="sudoai.social.html" /><link rel="prev" title="Trainer" href="sudoai.trainer.html" />
+
+    <meta name="generator" content="sphinx-4.0.3, furo 2021.07.05.beta38"/>
+        <title>Pipeline - SUDOAI 0.1.2-alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css" />
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">SUDOAI 0.1.2-alpha documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">SUDOAI 0.1.2-alpha documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">sudo-ai</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="sudoai.html">sudoai package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sudoai.preprocess.html">Preprocess</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.dataset.html">Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.models.html">Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.hypertuning.html">Hypertuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.trainer.html">Trainer</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.social.html">Social</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="pipeline">
+<h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-sudoai.pipeline">
+<span id="module-content"></span><h2>Module Content<a class="headerlink" href="#module-sudoai.pipeline" title="Permalink to this headline">¶</a></h2>
+<p>Pipeline module
+@author: Aymen Jemi (jemix) &lt;<a class="reference external" href="mailto:jemiaymen%40gmail.com">jemiaymen<span>@</span>gmail<span>.</span>com</a>&gt; at SUDO-AI</p>
+<p>Pipeline for natural language processing, sudoai.pipeline
+is a lightweight library to run easily any model.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>compressed arg work only on FastText model.</p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use sudoai Pipeline.</p>
+<p>Create and save pipeline:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="n">PipelineConfig</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'lid'</span><span class="p">,</span><span class="n">model_type</span><span class="o">=</span><span class="n">ModelType</span><span class="o">.</span><span class="n">FASTTEST</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">compressed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s1">'chbik blid sa7ebi'</span><span class="p">)</span>
+<span class="go">'aeb'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s1">'I ask always and no one answer me'</span><span class="p">)</span>
+<span class="go">'eng'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.pipeline.ModelType">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.pipeline.</span></span><span class="sig-name descname"><span class="pre">ModelType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.ModelType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumerate for models types, accepted by Pipeline class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.ModelType.WORD_TO_LABEL">
+<span class="sig-name descname"><span class="pre">WORD_TO_LABEL</span></span><a class="headerlink" href="#sudoai.pipeline.ModelType.WORD_TO_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Word2Label model (1) .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.ModelType.WORD_TO_WORD">
+<span class="sig-name descname"><span class="pre">WORD_TO_WORD</span></span><a class="headerlink" href="#sudoai.pipeline.ModelType.WORD_TO_WORD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Word2Label model (2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.ModelType.SEQ_TO_LABEL">
+<span class="sig-name descname"><span class="pre">SEQ_TO_LABEL</span></span><a class="headerlink" href="#sudoai.pipeline.ModelType.SEQ_TO_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seq2Label model (3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.ModelType.SEQ_TO_SEQ">
+<span class="sig-name descname"><span class="pre">SEQ_TO_SEQ</span></span><a class="headerlink" href="#sudoai.pipeline.ModelType.SEQ_TO_SEQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>For Seq2Seq model (4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.ModelType.FASTTEXT">
+<span class="sig-name descname"><span class="pre">FASTTEXT</span></span><a class="headerlink" href="#sudoai.pipeline.ModelType.FASTTEXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>FastText model (5).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">FASTTEXT</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'5'</span></em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">SEQ_TO_LABEL</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'3'</span></em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">SEQ_TO_SEQ</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'4'</span></em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">WORD_TO_LABEL</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'1'</span></em><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">WORD_TO_WORD</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'2'</span></em><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sudoai.pipeline.PipelineConfig" title="sudoai.pipeline.core.PipelineConfig"><span class="pre">sudoai.pipeline.core.PipelineConfig</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Pipeline with a <a class="reference internal" href="#sudoai.pipeline.PipelineConfig" title="sudoai.pipeline.PipelineConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PipelineConfig</span></code></a>.</p>
+<p>Create nlp pipeline with pipeline config file.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.config">
+<span class="sig-name descname"><span class="pre">config</span></span><a class="headerlink" href="#sudoai.pipeline.Pipeline.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pipeline configuration class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.pipeline.PipelineConfig" title="sudoai.pipeline.PipelineConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PipelineConfig</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sudoai.pipeline.Pipeline.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Model</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.src_tokenizer">
+<span class="sig-name descname"><span class="pre">src_tokenizer</span></span><a class="headerlink" href="#sudoai.pipeline.Pipeline.src_tokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Source tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tokenizer</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.target_tokenizer">
+<span class="sig-name descname"><span class="pre">target_tokenizer</span></span><a class="headerlink" href="#sudoai.pipeline.Pipeline.target_tokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tokenizer</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.tokenizer">
+<span class="sig-name descname"><span class="pre">tokenizer</span></span><a class="headerlink" href="#sudoai.pipeline.Pipeline.tokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tokenizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tokenizer</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.io">
+<span class="sig-name descname"><span class="pre">io</span></span><a class="headerlink" href="#sudoai.pipeline.Pipeline.io" title="Permalink to this definition">¶</a></dt>
+<dd><p>To Download models and tokenizer if not exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputOutput</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.kwargs">
+<span class="sig-name descname"><span class="pre">kwargs</span></span><a class="headerlink" href="#sudoai.pipeline.Pipeline.kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict(str,any)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.Pipeline.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load model and tokenizer from Pipeline config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#sudoai.pipeline.PipelineException" title="sudoai.pipeline.PipelineException"><strong>PipelineException</strong></a> – When config file not found.</p></li>
+<li><p><a class="reference internal" href="#sudoai.pipeline.PipelineException" title="sudoai.pipeline.PipelineException"><strong>PipelineException</strong></a> – When model is None.</p></li>
+<li><p><a class="reference internal" href="#sudoai.pipeline.PipelineException" title="sudoai.pipeline.PipelineException"><strong>PipelineException</strong></a> – When tokenizer(s) is None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.Pipeline.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>inputs</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sudoai.pipeline.PipelineException" title="sudoai.pipeline.PipelineException"><strong>PipelineException</strong></a> – When inputs is None.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.pipeline.Pipeline.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.Pipeline.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save Pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>override</strong> (<em>bool</em><em>, </em><em>optional</em>) – If pipeline config file exist ecrase it. Defaults to False.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineConfig">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.pipeline.</span></span><span class="sig-name descname"><span class="pre">PipelineConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em>, <em class="sig-param"><span class="pre">description:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'default</span> <span class="pre">description'</span></em>, <em class="sig-param"><span class="pre">i2l:</span> <span class="pre">Dict[int</span></em>, <em class="sig-param"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">is_two_tokenizer:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">model_type:</span> <span class="pre">sudoai.pipeline.core.ModelType</span> <span class="pre">=</span> <span class="pre">&lt;ModelType.WORD_TO_LABEL:</span> <span class="pre">'1'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.PipelineConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is a data class definition, to identify all pipeline info.</p>
+<p>A <a class="reference internal" href="#sudoai.pipeline.PipelineConfig" title="sudoai.pipeline.PipelineConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PipelineConfig</span></code></a> class definition contains identificaiton and
+allocation information for <a class="reference internal" href="#sudoai.pipeline.Pipeline" title="sudoai.pipeline.Pipeline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pipeline</span></code></a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineConfig.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineConfig.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifier for Model and Tokenizer(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineConfig.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineConfig.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model and Pipeline version. Defaults to ‘0.1.0’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineConfig.desscription">
+<span class="sig-name descname"><span class="pre">desscription</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineConfig.desscription" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pipeline description. Defaults to ‘default description’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineConfig.is_two_tokenizer">
+<span class="sig-name descname"><span class="pre">is_two_tokenizer</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineConfig.is_two_tokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>If model have two tokenizer (word2word). Defaults to False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineConfig.model_type">
+<span class="sig-name descname"><span class="pre">model_type</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineConfig.model_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model type. Defaults to ‘WORD_TO_LABEL’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.pipeline.ModelType" title="sudoai.pipeline.ModelType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModelType</span></code></a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineConfig.i2l">
+<span class="sig-name descname"><span class="pre">i2l</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineConfig.i2l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index to label dict. Defaults to {0: “bad”, 1: “good”}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[int, str], optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineConfig.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'default</span> <span class="pre">description'</span></em><a class="headerlink" href="#sudoai.pipeline.PipelineConfig.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">i2l</span></span><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">is_two_tokenizer</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">model_type</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="#sudoai.pipeline.ModelType" title="sudoai.pipeline.core.ModelType"><span class="pre">sudoai.pipeline.core.ModelType</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'1'</span></em><a class="headerlink" href="#id8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em><a class="headerlink" href="#id9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineException">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.pipeline.</span></span><span class="sig-name descname"><span class="pre">PipelineException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pipeline</span> <span class="pre">error'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.PipelineException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised in Pipeline class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reason</strong> (<em>str</em>) – Reason why pipeline not working.</p></li>
+<li><p><strong>msg</strong> (<em>str</em><em>, </em><em>optional</em>) – Human readable string describing the exception. Default to ‘pipeline error’</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineException.reason">
+<span class="sig-name descname"><span class="pre">reason</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineException.reason" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reason why pipeline not working.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineException.msg">
+<span class="sig-name descname"><span class="pre">msg</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineException.msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human readable string describing the exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineException.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#sudoai.pipeline.PipelineException.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.pipeline.PipelineException.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.PipelineException.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.pipeline.load_pipeline_config">
+<span class="sig-prename descclassname"><span class="pre">sudoai.pipeline.</span></span><span class="sig-name descname"><span class="pre">load_pipeline_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'0.1.0'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.load_pipeline_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load pipeline config from local storage with id and version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – Pipeline config identifier.</p></li>
+<li><p><strong>version</strong> (<em>str</em><em>, </em><em>optional</em>) – Pipeline version. Defaults to ‘0.1.0’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – When pipeline config file not exist.</p></li>
+<li><p><strong>TypeError</strong> – When pipeline config file is not correct.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Saved pipeline config.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sudoai.pipeline.PipelineConfig" title="sudoai.pipeline.PipelineConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PipelineConfig</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.pipeline.predict_from_ft">
+<span class="sig-prename descclassname"><span class="pre">sudoai.pipeline.</span></span><span class="sig-name descname"><span class="pre">predict_from_ft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.predict_from_ft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize predicted result from fasttext.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>inputs</strong> (<em>tuple</em><em>(</em><em>tuple</em><em>(</em><em>str</em><em>)</em><em>,</em><em>tuple</em><em>(</em><em>float</em><em>)</em><em>)</em>) – FastText predict result.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Predicted label.
+list: List of predicted labels.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="sudoai.pipeline.save_pipeline_config">
+<span class="sig-prename descclassname"><span class="pre">sudoai.pipeline.</span></span><span class="sig-name descname"><span class="pre">save_pipeline_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#sudoai.pipeline.PipelineConfig" title="sudoai.pipeline.core.PipelineConfig"><span class="pre">sudoai.pipeline.core.PipelineConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.pipeline.save_pipeline_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save pipeline config in local storage with id and version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<a class="reference internal" href="#sudoai.pipeline.PipelineConfig" title="sudoai.pipeline.PipelineConfig"><em>PipelineConfig</em></a>) – Pipeline config to save it.</p></li>
+<li><p><strong>override</strong> (<em>bool</em><em>, </em><em>optional</em>) – If pipeline config file exist ecrase it. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – When pipeline config file exist and override is False.</p>
+</dd>
+</dl>
+</dd></dl>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="sudoai.social.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Social</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="sudoai.trainer.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Trainer</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Pipeline</a><ul>
+<li><a class="reference internal" href="#module-sudoai.pipeline">Module Content</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    </body>
+</html>

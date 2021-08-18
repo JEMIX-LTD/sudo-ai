@@ -1,0 +1,911 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Models" href="sudoai.models.html" /><link rel="prev" title="Preprocess" href="sudoai.preprocess.html" />
+
+    <meta name="generator" content="sphinx-4.0.3, furo 2021.07.05.beta38"/>
+        <title>Dataset - SUDOAI 0.1.2-alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css" />
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">SUDOAI 0.1.2-alpha documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">SUDOAI 0.1.2-alpha documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">sudo-ai</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="sudoai.html">sudoai package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sudoai.preprocess.html">Preprocess</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.models.html">Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.hypertuning.html">Hypertuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.trainer.html">Trainer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.social.html">Social</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="dataset">
+<h1>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-sudoai.dataset">
+<span id="module-content"></span><h2>Module Content<a class="headerlink" href="#module-sudoai.dataset" title="Permalink to this headline">¶</a></h2>
+<p>Dataset module
+@author: Aymen Jemi (jemix) &lt;<a class="reference external" href="mailto:jemiaymen%40gmail.com">jemiaymen<span>@</span>gmail<span>.</span>com</a>&gt; at SUDO-AI</p>
+<p>Datasets for natural language processing, sudoai.dataset
+is a lightweight and extensible library to easily share
+and access datasets for Natural Language Processing (NLP).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want use compressed algo, <code class="xref py py-obj docutils literal notranslate"><span class="pre">ZipAlgo.LZMA</span></code>
+always be the best solution.</p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use DataType in DatasetInfo class.</p>
+<p>Text data file:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.txt'</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">TEXT</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">data_type</span>
+<span class="go">&lt;DataType.TEXT: '1'&gt;</span>
+</pre></div>
+</div>
+<p>Excel data file:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.xlsx'</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">EXCEL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">data_type</span>
+<span class="go">&lt;DataType.TEXT: '4'&gt;</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.dataset.DataType">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.dataset.</span></span><span class="sig-name descname"><span class="pre">DataType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.dataset.DataType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumerate for accepted data types by Dataset class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DataType.TEXT">
+<span class="sig-name descname"><span class="pre">TEXT</span></span><a class="headerlink" href="#sudoai.dataset.DataType.TEXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>For text data file (1).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DataType.CSV">
+<span class="sig-name descname"><span class="pre">CSV</span></span><a class="headerlink" href="#sudoai.dataset.DataType.CSV" title="Permalink to this definition">¶</a></dt>
+<dd><p>For csv data file (2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DataType.JSON">
+<span class="sig-name descname"><span class="pre">JSON</span></span><a class="headerlink" href="#sudoai.dataset.DataType.JSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>For json data file (3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DataType.EXCEL">
+<span class="sig-name descname"><span class="pre">EXCEL</span></span><a class="headerlink" href="#sudoai.dataset.DataType.EXCEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>For excel data file (4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information check quickstart docs <a class="reference external" href="http://sudoai.tech/quickstart">http://sudoai.tech/quickstart</a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use DataType in DatasetInfo class.</p>
+<p>Text data file:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.txt'</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">TEXT</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">data_type</span>
+<span class="go">&lt;DataType.TEXT: '1'&gt;</span>
+</pre></div>
+</div>
+<p>Excel data file:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.xlsx'</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">EXCEL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">data_type</span>
+<span class="go">&lt;DataType.TEXT: '4'&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">CSV</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'2'</span></em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">EXCEL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'4'</span></em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">JSON</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'3'</span></em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">TEXT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'1'</span></em><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#sudoai.dataset.DatasetInfo" title="sudoai.dataset.core.DatasetInfo"><span class="pre">sudoai.dataset.core.DatasetInfo</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.dataset.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Defines a dataset with <cite>DatasetInfo</cite>.</p>
+<p>Create a dataset from a data file (text, csv, json or excel) .
+Don’t forget to attribute unique identifian to DatasetInfo.id .</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.info">
+<span class="sig-name descname"><span class="pre">info</span></span><a class="headerlink" href="#sudoai.dataset.Dataset.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>DatasetInfo with all dataset information .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.dataset.DatasetInfo" title="sudoai.dataset.DatasetInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatasetInfo</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#sudoai.dataset.Dataset.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of encoded tokens in <cite>torch.tensor</cite> .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.plain_data">
+<span class="sig-name descname"><span class="pre">plain_data</span></span><a class="headerlink" href="#sudoai.dataset.Dataset.plain_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of plain text in <cite>str</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information check quickstart docs <a class="reference external" href="http://sudoai.tech/quickstart">http://sudoai.tech/quickstart</a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use Dataset class.</p>
+<p>Word2Label model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.txt'</span><span class="p">,</span> <span class="n">dataset_type</span><span class="o">=</span><span class="n">DatasetType</span><span class="o">.</span><span class="n">WORD_TO_LABEL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">load_tokenizer</span><span class="p">(</span><span class="s1">'sa'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="n">info</span><span class="p">,</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Word2Word model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.txt'</span><span class="p">,</span> <span class="n">dataset_type</span><span class="o">=</span><span class="n">DatasetType</span><span class="o">.</span><span class="n">WORD_TO_WORD</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t_src</span> <span class="o">=</span> <span class="n">load_tokenizer</span><span class="p">(</span><span class="s1">'sa/src'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t_target</span> <span class="o">=</span> <span class="n">load_tokenizer</span><span class="p">(</span><span class="s1">'sa/target'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="n">info</span><span class="p">,</span> <span class="n">src_tokenizer</span><span class="o">=</span><span class="n">t_src</span><span class="p">,</span> <span class="n">target_tokenizer</span><span class="o">=</span><span class="n">t_target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.dataset.Dataset.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build dataset .</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If dataset_type is <cite>TEXT</cite> data contains str.</p>
+<p>If dataset_type is <cite>WORD_TO_LABEL</cite> or
+<cite>SEQ_TO_LABEL</cite> data contains Tuple(str, label).</p>
+<p>If dataset_type is <cite>WORD_TO_WORD</cite> or <cite>SEQ_TO_SEQ</cite> data contains Tuple(str, str).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.data_to_tensor">
+<span class="sig-name descname"><span class="pre">data_to_tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">torch.Tensor</span><a class="headerlink" href="#sudoai.dataset.Dataset.data_to_tensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data to tokens and return tensor with index from tokens.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – Line of data in string format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Torch Tensor with tokens index.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>torch.Tensor</cite></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.label_to_tensor">
+<span class="sig-name descname"><span class="pre">label_to_tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">torch.Tensor</span><a class="headerlink" href="#sudoai.dataset.Dataset.label_to_tensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform label to index and return tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>label</strong> (<cite>str</cite>) – Label in string format.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If label not found in <cite>self.info.l2i</cite> .</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Torch Tensor with label index.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><cite>torch.Tensor</cite></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.load">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.dataset.Dataset.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load saved dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – Dataset unique id.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataset from id.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.dataset.Dataset" title="sudoai.dataset.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.n_class">
+<span class="sig-name descname"><span class="pre">n_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">int</span><a class="headerlink" href="#sudoai.dataset.Dataset.n_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get number of label classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Number of label classes.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.dataset.Dataset.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">override:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">is_ziped:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">algo:</span> <span class="pre">sudoai.utils.datasets.ZipAlgo</span> <span class="pre">=</span> <span class="pre">&lt;ZipAlgo.LZMA:</span> <span class="pre">'3'&gt;</span></em><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="headerlink" href="#sudoai.dataset.Dataset.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save dataset with id and version and compressed algo if exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>override</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True delete old dataset file. Defaults to False.</p></li>
+<li><p><strong>is_ziped</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True compress dataset file. Defaults to False.</p></li>
+<li><p><strong>algo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">ZipAlgo</span></code>, optional) – Compressing algorithm (LZMA, BZ2 or GZIP). Defaults to ZipAlgo.LZMA.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – If override is False and dataset file exists.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you set is_ziped True you must chose <code class="xref py py-obj docutils literal notranslate"><span class="pre">ZipAlgo</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if dataset saved.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.dataset.</span></span><span class="sig-name descname"><span class="pre">DatasetError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Dataset</span> <span class="pre">error!!'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.dataset.DatasetError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised in Dataset class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<a class="reference internal" href="#sudoai.dataset.Dataset" title="sudoai.dataset.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code></a>) – Current dataset object.</p></li>
+<li><p><strong>message</strong> (<em>str</em><em>, </em><em>optional</em>) – Human readable string describing the exception. Defaults to “Dataset error!!”.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetError.dataset">
+<span class="sig-name descname"><span class="pre">dataset</span></span><a class="headerlink" href="#sudoai.dataset.DatasetError.dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current dataset object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.dataset.Dataset" title="sudoai.dataset.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetError.message">
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#sudoai.dataset.DatasetError.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human readable string describing the exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#sudoai.dataset.DatasetError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.dataset.DatasetError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.dataset.</span></span><span class="sig-name descname"><span class="pre">DatasetInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">data_path:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em>, <em class="sig-param"><span class="pre">description:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">str_text:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'text'</span></em>, <em class="sig-param"><span class="pre">str_label:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'label'</span></em>, <em class="sig-param"><span class="pre">i2l:</span> <span class="pre">Dict[int</span></em>, <em class="sig-param"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">l2i:</span> <span class="pre">Dict[str</span></em>, <em class="sig-param"><span class="pre">list]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">data_type:</span> <span class="pre">sudoai.dataset.core.DataType</span> <span class="pre">=</span> <span class="pre">&lt;DataType.TEXT:</span> <span class="pre">'1'&gt;</span></em>, <em class="sig-param"><span class="pre">dataset_type:</span> <span class="pre">sudoai.dataset.core.DatasetType</span> <span class="pre">=</span> <span class="pre">&lt;DatasetType.TEXT:</span> <span class="pre">'1'&gt;</span></em>, <em class="sig-param"><span class="pre">sep:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'\t'</span></em>, <em class="sig-param"><span class="pre">sep_label:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'</span></em>, <em class="sig-param"><span class="pre">'</span></em>, <em class="sig-param"><span class="pre">encoding:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'utf8'</span></em>, <em class="sig-param"><span class="pre">verbose:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></em>, <em class="sig-param"><span class="pre">max_length:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">256</span></em>, <em class="sig-param"><span class="pre">do_lower_case:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">strip_duplicated:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">strip_punc:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">stopword:</span> <span class="pre">Optional[sudoai.preprocess.text.StopWord]</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.dataset.DatasetInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is a data class definition, to identify all info in dataset.</p>
+<blockquote>
+<div><p>A <cite>DatasetInfo</cite> class definition contains identification and
+allocation information for <cite>Dataset</cite>.
+Each <cite>DatasetInfo</cite> class must contains unique id that contains
+<cite>[a-zA-Z0-9]</cite> characters without spaces.</p>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.data_path">
+<span class="sig-name descname"><span class="pre">data_path</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.data_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of data file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset version. Defaults to “0.1.0”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset description. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.str_text">
+<span class="sig-name descname"><span class="pre">str_text</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.str_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Column name of text (json, excel or csv). Default to ‘text’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.str_label">
+<span class="sig-name descname"><span class="pre">str_label</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.str_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Column name of label (json, excel or csv). Default to ‘label’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.data_type">
+<span class="sig-name descname"><span class="pre">data_type</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.data_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enumerate for dataset types. Default to <cite>DataType.TEXT</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.dataset.DataType" title="sudoai.dataset.DataType">DataType</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.dataset_type">
+<span class="sig-name descname"><span class="pre">dataset_type</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.dataset_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enumerate for dataset types. Defaults to <cite>DatasetType.TEXT</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.dataset.DatasetType" title="sudoai.dataset.DatasetType">DatasetType</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.sep">
+<span class="sig-name descname"><span class="pre">sep</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.sep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Separator between text and labels. Defaults to ‘   ‘.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.sep_label">
+<span class="sig-name descname"><span class="pre">sep_label</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.sep_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Separator between labels. Defaults to ‘,’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.encoding">
+<span class="sig-name descname"><span class="pre">encoding</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.encoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Text encoding. Defaults to ‘utf8’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.do_lower_case">
+<span class="sig-name descname"><span class="pre">do_lower_case</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.do_lower_case" title="Permalink to this definition">¶</a></dt>
+<dd><p>For lowercase text. Defaults to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verbose value. Defaults to 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.max_length">
+<span class="sig-name descname"><span class="pre">max_length</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.max_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of max elements (tokens). Defaults to 256.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.strip_duplicated">
+<span class="sig-name descname"><span class="pre">strip_duplicated</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.strip_duplicated" title="Permalink to this definition">¶</a></dt>
+<dd><p>To strip duplicated lettre (exp hhhhello ~&gt; hello). Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.strip_punc">
+<span class="sig-name descname"><span class="pre">strip_punc</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.strip_punc" title="Permalink to this definition">¶</a></dt>
+<dd><p>To strip punctuation. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.stopword">
+<span class="sig-name descname"><span class="pre">stopword</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.stopword" title="Permalink to this definition">¶</a></dt>
+<dd><p>StopWord class to espace stopwords. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><cite>StopWord</cite>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.l2i">
+<span class="sig-name descname"><span class="pre">l2i</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.l2i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert label to index. Defaults to {0:’bad’} .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[int, str], optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetInfo.i2l">
+<span class="sig-name descname"><span class="pre">i2l</span></span><a class="headerlink" href="#sudoai.dataset.DatasetInfo.i2l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert index to label. Defaults to {‘good’:[1]} .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, list], optional</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information check the quickstart docs <a class="reference external" href="http://sudoai.tech/quickstart">http://sudoai.tech/quickstart</a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use <cite>DatasetInfo</cite> class.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.xlsx'</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">EXCEL</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.txt'</span><span class="p">,</span><span class="n">dataset_type</span><span class="o">=</span><span class="n">DatasetType</span><span class="o">.</span><span class="n">WORD_TO_LABEL</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">data_path</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">data_type</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="#sudoai.dataset.DataType" title="sudoai.dataset.core.DataType"><span class="pre">sudoai.dataset.core.DataType</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'1'</span></em><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">dataset_type</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="#sudoai.dataset.DatasetType" title="sudoai.dataset.core.DatasetType"><span class="pre">sudoai.dataset.core.DatasetType</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'1'</span></em><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">do_lower_case</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#id8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">encoding</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'utf8'</span></em><a class="headerlink" href="#id9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">i2l</span></span><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#id11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">l2i</span></span><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">max_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">256</span></em><a class="headerlink" href="#id13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">sep</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'\t'</span></em><a class="headerlink" href="#id14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-name descname"><span class="pre">sep_label</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">','</span></em><a class="headerlink" href="#id15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-name descname"><span class="pre">stopword</span></span><em class="property"><span class="pre">:</span> <a class="reference internal" href="sudoai.preprocess.html#sudoai.preprocess.StopWord" title="sudoai.preprocess.text.StopWord"><span class="pre">sudoai.preprocess.text.StopWord</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#id16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id17">
+<span class="sig-name descname"><span class="pre">str_label</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'label'</span></em><a class="headerlink" href="#id17" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id18">
+<span class="sig-name descname"><span class="pre">str_text</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'text'</span></em><a class="headerlink" href="#id18" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id19">
+<span class="sig-name descname"><span class="pre">strip_duplicated</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#id19" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id20">
+<span class="sig-name descname"><span class="pre">strip_punc</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#id20" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id21">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#id21" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id22">
+<span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em><a class="headerlink" href="#id22" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetType">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.dataset.</span></span><span class="sig-name descname"><span class="pre">DatasetType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.dataset.DatasetType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumerate for dataset types, to work with sudoai.models accepted by Dataset class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetType.TEXT">
+<span class="sig-name descname"><span class="pre">TEXT</span></span><a class="headerlink" href="#sudoai.dataset.DatasetType.TEXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>For Text model (1) .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetType.WORD_TO_LABEL">
+<span class="sig-name descname"><span class="pre">WORD_TO_LABEL</span></span><a class="headerlink" href="#sudoai.dataset.DatasetType.WORD_TO_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>For Word2Label model (2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetType.WORD_TO_WORD">
+<span class="sig-name descname"><span class="pre">WORD_TO_WORD</span></span><a class="headerlink" href="#sudoai.dataset.DatasetType.WORD_TO_WORD" title="Permalink to this definition">¶</a></dt>
+<dd><p>For Word2Word model (3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetType.SEQ_TO_LABEL">
+<span class="sig-name descname"><span class="pre">SEQ_TO_LABEL</span></span><a class="headerlink" href="#sudoai.dataset.DatasetType.SEQ_TO_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>For Seq2Label model (4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.dataset.DatasetType.SEQ_TO_SEQ">
+<span class="sig-name descname"><span class="pre">SEQ_TO_SEQ</span></span><a class="headerlink" href="#sudoai.dataset.DatasetType.SEQ_TO_SEQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>For Seq2Seq model (4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information check quickstart docs <a class="reference external" href="http://sudoai.tech/quickstart">http://sudoai.tech/quickstart</a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use DatasetType in DatasetInfo class.</p>
+<p>For Word2Label model:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.xlsx'</span><span class="p">,</span><span class="n">dataset_type</span><span class="o">=</span><span class="n">DatasetType</span><span class="o">.</span><span class="n">WORD_TO_LABEL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">dataset_type</span>
+<span class="go">&lt;DatasetType.WORD_TO_LABEL: '2'&gt;</span>
+</pre></div>
+</div>
+<p>For Seq2Label:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">DatasetInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'sa'</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'data.txt'</span><span class="p">,</span><span class="n">dataset_type</span><span class="o">=</span><span class="n">DatasetType</span><span class="o">.</span><span class="n">SEQ_TO_LABEL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span><span class="o">.</span><span class="n">dataset_type</span>
+<span class="go">&lt;DatasetType.WORD_TO_LABEL: '4'&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id23">
+<span class="sig-name descname"><span class="pre">SEQ_TO_LABEL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'4'</span></em><a class="headerlink" href="#id23" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id24">
+<span class="sig-name descname"><span class="pre">SEQ_TO_SEQ</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'5'</span></em><a class="headerlink" href="#id24" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id25">
+<span class="sig-name descname"><span class="pre">TEXT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'1'</span></em><a class="headerlink" href="#id25" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id26">
+<span class="sig-name descname"><span class="pre">WORD_TO_LABEL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'2'</span></em><a class="headerlink" href="#id26" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id27">
+<span class="sig-name descname"><span class="pre">WORD_TO_WORD</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'3'</span></em><a class="headerlink" href="#id27" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="sudoai.models.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Models</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="sudoai.preprocess.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Preprocess</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Dataset</a><ul>
+<li><a class="reference internal" href="#module-sudoai.dataset">Module Content</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    </body>
+</html>

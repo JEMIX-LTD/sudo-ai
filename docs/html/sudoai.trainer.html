@@ -1,0 +1,1948 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Pipeline" href="sudoai.pipeline.html" /><link rel="prev" title="Hypertuning" href="sudoai.hypertuning.html" />
+
+    <meta name="generator" content="sphinx-4.0.3, furo 2021.07.05.beta38"/>
+        <title>Trainer - SUDOAI 0.1.2-alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css" />
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">SUDOAI 0.1.2-alpha documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">SUDOAI 0.1.2-alpha documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">sudo-ai</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="sudoai.html">sudoai package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sudoai.preprocess.html">Preprocess</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.dataset.html">Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.models.html">Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.hypertuning.html">Hypertuning</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Trainer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sudoai.social.html">Social</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="trainer">
+<h1>Trainer<a class="headerlink" href="#trainer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-sudoai.trainer">
+<span id="module-content"></span><h2>Module Content<a class="headerlink" href="#module-sudoai.trainer" title="Permalink to this headline">¶</a></h2>
+<p>Trainer module
+@author: Aymen Jemi (jemix) &lt;<a class="reference external" href="mailto:jemiaymen%40gmail.com">jemiaymen<span>@</span>gmail<span>.</span>com</a>&gt; at SUDO-AI</p>
+<p>sudoai.trainer is a lightweight and extensible library to
+easily train model for Natural Language Processing (NLP).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want use compressed algo, <code class="xref py py-obj docutils literal notranslate"><span class="pre">ZipAlgo.LZMA</span></code>
+always be the best solution.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To try trainer dataset must be exist in
+drive or local storage.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information check quickstart docs <a class="reference external" href="http://sudoai.tech/quickstart">http://sudoai.tech/quickstart</a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples illustrate how to use training modules.</p>
+<p>Word to Label classification:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">TokenClassificationTrainer</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">id</span><span class="o">=</span><span class="s1">'w2l_dataset_model'</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">hidden_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">lr</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">momentum</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">loss</span><span class="o">=</span><span class="s1">'nll'</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">optimizer</span><span class="o">=</span><span class="s1">'rmsprop'</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">do_eval</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">do_shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span><span class="p">(</span><span class="n">hyperparam</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">test_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.trainer.</span></span><span class="sig-name descname"><span class="pre">HybridXMLTrainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">model:</span> <span class="pre">sudoai.models.xmltc.HybridXMLTC</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em>, <em class="sig-param"><span class="pre">teacher_forcing_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></em>, <em class="sig-param"><span class="pre">hidden_size:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">512</span></em>, <em class="sig-param"><span class="pre">print_every:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">30000</span></em>, <em class="sig-param"><span class="pre">lr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0001</span></em>, <em class="sig-param"><span class="pre">epochs:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">2</span></em>, <em class="sig-param"><span class="pre">drop_out:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.1</span></em>, <em class="sig-param"><span class="pre">do_eval:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_save:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_shuffle:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">split_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.2</span></em>, <em class="sig-param"><span class="pre">do_save_checkpoint:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">continue_from_checkpoint:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">loss:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'nll'</span></em>, <em class="sig-param"><span class="pre">optimizer:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'rmsprop'</span></em>, <em class="sig-param"><span class="pre">momentum:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">wandb:</span> <span class="pre">&lt;module</span> <span class="pre">'wandb'</span> <span class="pre">from</span> <span class="pre">'c:\\anaconda3\\lib\\site-packages\\wandb\\__init__.py'&gt;</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">wandb_key:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">multiclass:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">base_path:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sudoai.trainer.Trainer" title="sudoai.trainer.core.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">sudoai.trainer.core.Trainer</span></code></a></p>
+<p>HybridXML Trainer class.</p>
+<p>Trainer for HybridXML model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>HybridXML Model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">HybridXML</span></code>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model version. Defaults to ‘0.1.0’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.teacher_forcing_ratio">
+<span class="sig-name descname"><span class="pre">teacher_forcing_ratio</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.teacher_forcing_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Teacher Forcing ratio for acceleration. Defaults to 0.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.hidden_size">
+<span class="sig-name descname"><span class="pre">hidden_size</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.hidden_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hidden size of the model. Defaults to 512.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.print_every">
+<span class="sig-name descname"><span class="pre">print_every</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.print_every" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log frequency result by steps (log result every 30000 steps). Defaults to 30000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.lr">
+<span class="sig-name descname"><span class="pre">lr</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.lr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn rate value. Defaults to 0.0001.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.epochs">
+<span class="sig-name descname"><span class="pre">epochs</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.epochs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of epochs. Defaults to 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.drop_out">
+<span class="sig-name descname"><span class="pre">drop_out</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.drop_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop out value. Defaults to 0.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.do_eval">
+<span class="sig-name descname"><span class="pre">do_eval</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.do_eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True evaluate. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.do_save">
+<span class="sig-name descname"><span class="pre">do_save</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.do_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save the model when training ends. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.do_shuffle">
+<span class="sig-name descname"><span class="pre">do_shuffle</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.do_shuffle" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True shuffle the dataset. Defaults to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.split_ratio">
+<span class="sig-name descname"><span class="pre">split_ratio</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.split_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.do_save_checkpoint">
+<span class="sig-name descname"><span class="pre">do_save_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.do_save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save checkpoint every epoch. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.continue_from_checkpoint">
+<span class="sig-name descname"><span class="pre">continue_from_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.continue_from_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of checkpoint as start point. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss function. Defaults to ‘nll’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizer function. Defaults to ‘rmsprop’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.momentum">
+<span class="sig-name descname"><span class="pre">momentum</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.momentum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Momentum value for optimizer. Defaults to 0.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.wandb">
+<span class="sig-name descname"><span class="pre">wandb</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.wandb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb class to track logs. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>wandb, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.wandb_key">
+<span class="sig-name descname"><span class="pre">wandb_key</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.wandb_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb api key. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.base_path">
+<span class="sig-name descname"><span class="pre">base_path</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.base_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base path to save checkpoint and model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.multiclass">
+<span class="sig-name descname"><span class="pre">multiclass</span></span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.multiclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True multiclass. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information about wandb check pytorch docs <a class="reference external" href="https://docs.wandb.ai/guides/integrations/pytorch">https://docs.wandb.ai/guides/integrations/pytorch</a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.data_process">
+<span class="sig-name descname"><span class="pre">data_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.data_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process dataset.</p>
+<p>Split data for training and evaluation.
+:param test_mode: If True enter in test mode. Defaults to False.
+:type test_mode: bool, optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception</strong> – when dataset is too small.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict with data for training and evaluation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visual evaluation process for random input from dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – number of item to evaluate. Defaults to 10.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save model with id and version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path of model saved to.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.save_checkpoint">
+<span class="sig-name descname"><span class="pre">save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save checkpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_epoch</strong> (<em>int</em>) – Current epoch number.</p></li>
+<li><p><strong>train_loss_avg</strong> (<em>float</em>) – Current average training loss .</p></li>
+<li><p><strong>eval_loss_avg</strong> (<em>float</em><em>, </em><em>optional</em>) – Current average evaluation loss. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entry point to begin the training process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in HyperParameter mode. Defaults to False.</p></li>
+<li><p><strong>test_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in test mode</p></li>
+<li><p><strong>mode to try with small amount of data</strong><strong>)</strong><strong> Defaults to False.</strong> (<em>(</em><em>Test</em>) – </p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logs all steps for reporting. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your dataset is too small (less then 100) and you chose test mode,
+an Exception raised.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.trainer.ModelError" title="sudoai.trainer.ModelError"><strong>ModelError</strong></a> – when model is None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.HybridXMLTrainer.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.HybridXMLTrainer.steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train</strong> (<em>dict</em>) – Dict with data for training and evaluation.</p></li>
+<li><p><strong>num_epoch</strong> (<em>int</em><em>, </em><em>optional</em>) – Current epoch number. Defaults to 1.</p></li>
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True enter Hypertuning mode. Defaults to False.</p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True log history. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="sudoai.trainer.ModelError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.trainer.</span></span><span class="sig-name descname"><span class="pre">ModelError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Model</span> <span class="pre">error.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.ModelError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised in Trainer class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>) – Current Model object.</p></li>
+<li><p><strong>message</strong> (<em>str</em><em>, </em><em>optional</em>) – Human readable string describing the exception. Defaults to “Model error.”.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.ModelError.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sudoai.trainer.ModelError.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current Model object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.ModelError.message">
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#sudoai.trainer.ModelError.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human readable string describing the exception. Defaults to “Model error.”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.ModelError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#sudoai.trainer.ModelError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.ModelError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.ModelError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.trainer.</span></span><span class="sig-name descname"><span class="pre">Seq2LabelTrainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">model:</span> <span class="pre">sudoai.models.seq.Seq2Label</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em>, <em class="sig-param"><span class="pre">teacher_forcing_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></em>, <em class="sig-param"><span class="pre">hidden_size:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">512</span></em>, <em class="sig-param"><span class="pre">print_every:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">30000</span></em>, <em class="sig-param"><span class="pre">lr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0001</span></em>, <em class="sig-param"><span class="pre">epochs:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">2</span></em>, <em class="sig-param"><span class="pre">drop_out:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.1</span></em>, <em class="sig-param"><span class="pre">do_eval:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_save:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_shuffle:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">split_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.2</span></em>, <em class="sig-param"><span class="pre">do_save_checkpoint:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">continue_from_checkpoint:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">loss:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'nll'</span></em>, <em class="sig-param"><span class="pre">optimizer:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'rmsprop'</span></em>, <em class="sig-param"><span class="pre">momentum:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">wandb:</span> <span class="pre">&lt;module</span> <span class="pre">'wandb'</span> <span class="pre">from</span> <span class="pre">'c:\\anaconda3\\lib\\site-packages\\wandb\\__init__.py'&gt;</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">wandb_key:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">base_path:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sudoai.trainer.Trainer" title="sudoai.trainer.core.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">sudoai.trainer.core.Trainer</span></code></a></p>
+<p>Sequence to Label Trainer class.</p>
+<p>Trainer for sequence to label model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sequence To Label Model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Seq2Label</span></code>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model version. Defaults to ‘0.1.0’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.teacher_forcing_ratio">
+<span class="sig-name descname"><span class="pre">teacher_forcing_ratio</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.teacher_forcing_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Teacher Forcing ratio for acceleration. Defaults to 0.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.hidden_size">
+<span class="sig-name descname"><span class="pre">hidden_size</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.hidden_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hidden size of the model. Defaults to 512.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.print_every">
+<span class="sig-name descname"><span class="pre">print_every</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.print_every" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log frequency result by steps (log result every 30000 steps). Defaults to 30000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.lr">
+<span class="sig-name descname"><span class="pre">lr</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.lr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn rate value. Defaults to 0.0001.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.epochs">
+<span class="sig-name descname"><span class="pre">epochs</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.epochs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of epochs. Defaults to 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.drop_out">
+<span class="sig-name descname"><span class="pre">drop_out</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.drop_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop out value. Defaults to 0.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.do_eval">
+<span class="sig-name descname"><span class="pre">do_eval</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.do_eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True evaluate. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.do_save">
+<span class="sig-name descname"><span class="pre">do_save</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.do_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save the model when training ends. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.do_shuffle">
+<span class="sig-name descname"><span class="pre">do_shuffle</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.do_shuffle" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True shuffle the dataset. Defaults to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.split_ratio">
+<span class="sig-name descname"><span class="pre">split_ratio</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.split_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.do_save_checkpoint">
+<span class="sig-name descname"><span class="pre">do_save_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.do_save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save checkpoint every epoch. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.continue_from_checkpoint">
+<span class="sig-name descname"><span class="pre">continue_from_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.continue_from_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of checkpoint as start point. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss function. Defaults to ‘nll’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizer function. Defaults to ‘rmsprop’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.momentum">
+<span class="sig-name descname"><span class="pre">momentum</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.momentum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Momentum value for optimizer. Defaults to 0.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.wandb">
+<span class="sig-name descname"><span class="pre">wandb</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.wandb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb class to track logs. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>wandb, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.wandb_key">
+<span class="sig-name descname"><span class="pre">wandb_key</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.wandb_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb api key. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.base_path">
+<span class="sig-name descname"><span class="pre">base_path</span></span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.base_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base path to save checkpoint and model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information about wandb check pytorch docs <a class="reference external" href="https://docs.wandb.ai/guides/integrations/pytorch">https://docs.wandb.ai/guides/integrations/pytorch</a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.data_process">
+<span class="sig-name descname"><span class="pre">data_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.data_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process dataset.</p>
+<p>Split data for training and evaluation.
+:param test_mode: If True enter in test mode. Defaults to False.
+:type test_mode: bool, optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception</strong> – when dataset is too small.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict with data for training and evaluation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visual evaluation process for random input from dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – number of item to evaluate. Defaults to 10.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save model with id and version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path of model saved to.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.save_checkpoint">
+<span class="sig-name descname"><span class="pre">save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save checkpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_epoch</strong> (<em>int</em>) – Current epoch number.</p></li>
+<li><p><strong>train_loss_avg</strong> (<em>float</em>) – Current average training loss .</p></li>
+<li><p><strong>eval_loss_avg</strong> (<em>float</em><em>, </em><em>optional</em>) – Current average evaluation loss. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entry point to begin the training process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in HyperParameter mode. Defaults to False.</p></li>
+<li><p><strong>test_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in test mode</p></li>
+<li><p><strong>mode to try with small amount of data</strong><strong>)</strong><strong> Defaults to False.</strong> (<em>(</em><em>Test</em>) – </p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logs all steps for reporting. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your dataset is too small (less then 100) and you chose test mode,
+an Exception raised.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.trainer.ModelError" title="sudoai.trainer.ModelError"><strong>ModelError</strong></a> – when model is None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Seq2LabelTrainer.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Seq2LabelTrainer.steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train</strong> (<em>dict</em>) – Dict with data for training and evaluation.</p></li>
+<li><p><strong>num_epoch</strong> (<em>int</em><em>, </em><em>optional</em>) – Current epoch number. Defaults to 1.</p></li>
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True enter Hypertuning mode. Defaults to False.</p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True log history. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.trainer.</span></span><span class="sig-name descname"><span class="pre">TokenClassificationTrainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">model:</span> <span class="pre">sudoai.models.word.Word2Label</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em>, <em class="sig-param"><span class="pre">teacher_forcing_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></em>, <em class="sig-param"><span class="pre">hidden_size:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">512</span></em>, <em class="sig-param"><span class="pre">print_every:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">30000</span></em>, <em class="sig-param"><span class="pre">lr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0001</span></em>, <em class="sig-param"><span class="pre">epochs:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">2</span></em>, <em class="sig-param"><span class="pre">drop_out:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.1</span></em>, <em class="sig-param"><span class="pre">do_eval:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_save:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_shuffle:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">split_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.2</span></em>, <em class="sig-param"><span class="pre">do_save_checkpoint:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">continue_from_checkpoint:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">loss:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'nll'</span></em>, <em class="sig-param"><span class="pre">optimizer:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'rmsprop'</span></em>, <em class="sig-param"><span class="pre">momentum:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">wandb:</span> <span class="pre">&lt;module</span> <span class="pre">'wandb'</span> <span class="pre">from</span> <span class="pre">'c:\\anaconda3\\lib\\site-packages\\wandb\\__init__.py'&gt;</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">wandb_key:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">base_path:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sudoai.trainer.Trainer" title="sudoai.trainer.core.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">sudoai.trainer.core.Trainer</span></code></a></p>
+<p>Word to Label Trainer class.</p>
+<p>Trainer for Word to label model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Word To Label Model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Word2Label</span></code>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model version. Defaults to ‘0.1.0’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.teacher_forcing_ratio">
+<span class="sig-name descname"><span class="pre">teacher_forcing_ratio</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.teacher_forcing_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Teacher Forcing ratio for acceleration. Defaults to 0.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.hidden_size">
+<span class="sig-name descname"><span class="pre">hidden_size</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.hidden_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hidden size of the model. Defaults to 512.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.print_every">
+<span class="sig-name descname"><span class="pre">print_every</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.print_every" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log frequency result by steps (log result every 30000 steps). Defaults to 30000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.lr">
+<span class="sig-name descname"><span class="pre">lr</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.lr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn rate value. Defaults to 0.0001.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.epochs">
+<span class="sig-name descname"><span class="pre">epochs</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.epochs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of epochs. Defaults to 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.drop_out">
+<span class="sig-name descname"><span class="pre">drop_out</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.drop_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop out value. Defaults to 0.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.do_eval">
+<span class="sig-name descname"><span class="pre">do_eval</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.do_eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True evaluate. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.do_save">
+<span class="sig-name descname"><span class="pre">do_save</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.do_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save the model when training ends. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.do_shuffle">
+<span class="sig-name descname"><span class="pre">do_shuffle</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.do_shuffle" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True shuffle the dataset. Defaults to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.split_ratio">
+<span class="sig-name descname"><span class="pre">split_ratio</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.split_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.do_save_checkpoint">
+<span class="sig-name descname"><span class="pre">do_save_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.do_save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save checkpoint every epoch. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.continue_from_checkpoint">
+<span class="sig-name descname"><span class="pre">continue_from_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.continue_from_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of checkpoint as start point. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss function. Defaults to ‘nll’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizer function. Defaults to ‘rmsprop’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.momentum">
+<span class="sig-name descname"><span class="pre">momentum</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.momentum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Momentum value for optimizer. Defaults to 0.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.wandb">
+<span class="sig-name descname"><span class="pre">wandb</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.wandb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb class to track logs. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>wandb, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.wandb_key">
+<span class="sig-name descname"><span class="pre">wandb_key</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.wandb_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb api key. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.base_path">
+<span class="sig-name descname"><span class="pre">base_path</span></span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.base_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base path to save checkpoint and model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information about wandb check pytorch docs <a class="reference external" href="https://docs.wandb.ai/guides/integrations/pytorch">https://docs.wandb.ai/guides/integrations/pytorch</a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.data_process">
+<span class="sig-name descname"><span class="pre">data_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.data_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process dataset.</p>
+<p>Split data for training and evaluation.
+:param test_mode: If True enter in test mode. Defaults to False.
+:type test_mode: bool, optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception</strong> – when dataset is too small.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict with data for training and evaluation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visual evaluation process for random input from dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – number of item to evaluate. Defaults to 10.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save model with id and version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path of model saved to.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.save_checkpoint">
+<span class="sig-name descname"><span class="pre">save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save checkpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_epoch</strong> (<em>int</em>) – Current epoch number.</p></li>
+<li><p><strong>train_loss_avg</strong> (<em>float</em>) – Current average training loss .</p></li>
+<li><p><strong>eval_loss_avg</strong> (<em>float</em><em>, </em><em>optional</em>) – Current average evaluation loss. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entry point to begin the training process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in HyperParameter mode. Defaults to False.</p></li>
+<li><p><strong>test_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in test mode</p></li>
+<li><p><strong>mode to try with small amount of data</strong><strong>)</strong><strong> Defaults to False.</strong> (<em>(</em><em>Test</em>) – </p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logs all steps for reporting. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your dataset is too small (less then 100) and you chose test mode,
+an Exception raised.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.trainer.ModelError" title="sudoai.trainer.ModelError"><strong>ModelError</strong></a> – when model is None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.TokenClassificationTrainer.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.TokenClassificationTrainer.steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train</strong> (<em>dict</em>) – Dict with data for training and evaluation.</p></li>
+<li><p><strong>num_epoch</strong> (<em>int</em><em>, </em><em>optional</em>) – Current epoch number. Defaults to 1.</p></li>
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True enter Hypertuning mode. Defaults to False.</p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True log history. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.trainer.</span></span><span class="sig-name descname"><span class="pre">Trainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em>, <em class="sig-param"><span class="pre">teacher_forcing_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></em>, <em class="sig-param"><span class="pre">hidden_size:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">512</span></em>, <em class="sig-param"><span class="pre">print_every:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">30000</span></em>, <em class="sig-param"><span class="pre">lr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0001</span></em>, <em class="sig-param"><span class="pre">epochs:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">2</span></em>, <em class="sig-param"><span class="pre">drop_out:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.1</span></em>, <em class="sig-param"><span class="pre">do_eval:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_save:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_shuffle:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">split_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.2</span></em>, <em class="sig-param"><span class="pre">do_save_checkpoint:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">continue_from_checkpoint:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">loss:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'nll'</span></em>, <em class="sig-param"><span class="pre">optimizer:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'rmsprop'</span></em>, <em class="sig-param"><span class="pre">momentum:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">wandb:</span> <span class="pre">&lt;module</span> <span class="pre">'wandb'</span> <span class="pre">from</span> <span class="pre">'c:\\anaconda3\\lib\\site-packages\\wandb\\__init__.py'&gt;</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">wandb_key:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">base_path:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Trainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class sudoai.trainer.Trainer representing a Trainer.</p>
+<p>All Trainers that represent a training process should subclass it.
+All subclasses should overwrite __init__(), supporting the new attributes.
+Subclasses could also optinally overwrite steps(), which is the main process
+for training steps.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model version. Defaults to ‘0.1.0’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.teacher_forcing_ratio">
+<span class="sig-name descname"><span class="pre">teacher_forcing_ratio</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.teacher_forcing_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Teacher Forcing ratio for acceleration. Defaults to 0.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.hidden_size">
+<span class="sig-name descname"><span class="pre">hidden_size</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.hidden_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hidden size of the model. Defaults to 512.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.print_every">
+<span class="sig-name descname"><span class="pre">print_every</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.print_every" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log frequency result by steps (log result every 30000 steps). Defaults to 30000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.lr">
+<span class="sig-name descname"><span class="pre">lr</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.lr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn rate value. Defaults to 0.0001.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.epochs">
+<span class="sig-name descname"><span class="pre">epochs</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.epochs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of epochs. Defaults to 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.drop_out">
+<span class="sig-name descname"><span class="pre">drop_out</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.drop_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop out value. Defaults to 0.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.do_eval">
+<span class="sig-name descname"><span class="pre">do_eval</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.do_eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True evaluate. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.do_save">
+<span class="sig-name descname"><span class="pre">do_save</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.do_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save the model when training ends. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.do_shuffle">
+<span class="sig-name descname"><span class="pre">do_shuffle</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.do_shuffle" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True shuffle the dataset. Defaults to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.split_ratio">
+<span class="sig-name descname"><span class="pre">split_ratio</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.split_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.do_save_checkpoint">
+<span class="sig-name descname"><span class="pre">do_save_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.do_save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save checkpoint every epoch. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.continue_from_checkpoint">
+<span class="sig-name descname"><span class="pre">continue_from_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.continue_from_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of checkpoint as start point. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss function. Defaults to ‘nll’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizer function. Defaults to ‘rmsprop’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.momentum">
+<span class="sig-name descname"><span class="pre">momentum</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.momentum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Momentum value for optimizer. Defaults to 0.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.wandb">
+<span class="sig-name descname"><span class="pre">wandb</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.wandb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb class to track logs. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>wandb, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.wandb_key">
+<span class="sig-name descname"><span class="pre">wandb_key</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.wandb_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb api key. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.base_path">
+<span class="sig-name descname"><span class="pre">base_path</span></span><a class="headerlink" href="#sudoai.trainer.Trainer.base_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base path to save checkpoint and model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information about wandb check pytorch docs <a class="reference external" href="https://docs.wandb.ai/guides/integrations/pytorch">https://docs.wandb.ai/guides/integrations/pytorch</a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.data_process">
+<span class="sig-name descname"><span class="pre">data_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="headerlink" href="#sudoai.trainer.Trainer.data_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process dataset.</p>
+<p>Split data for training and evaluation.
+:param test_mode: If True enter in test mode. Defaults to False.
+:type test_mode: bool, optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception</strong> – when dataset is too small.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict with data for training and evaluation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.Trainer.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visual evaluation process for random input from dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – number of item to evaluate. Defaults to 10.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#sudoai.trainer.Trainer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save model with id and version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path of model saved to.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.save_checkpoint">
+<span class="sig-name descname"><span class="pre">save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.Trainer.save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save checkpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_epoch</strong> (<em>int</em>) – Current epoch number.</p></li>
+<li><p><strong>train_loss_avg</strong> (<em>float</em>) – Current average training loss .</p></li>
+<li><p><strong>eval_loss_avg</strong> (<em>float</em><em>, </em><em>optional</em>) – Current average evaluation loss. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Trainer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entry point to begin the training process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in HyperParameter mode. Defaults to False.</p></li>
+<li><p><strong>test_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in test mode</p></li>
+<li><p><strong>mode to try with small amount of data</strong><strong>)</strong><strong> Defaults to False.</strong> (<em>(</em><em>Test</em>) – </p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logs all steps for reporting. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your dataset is too small (less then 100) and you chose test mode,
+an Exception raised.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.trainer.ModelError" title="sudoai.trainer.ModelError"><strong>ModelError</strong></a> – when model is None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Trainer.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Trainer.steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train</strong> (<em>dict</em>) – Dict with data for training and evaluation.</p></li>
+<li><p><strong>num_epoch</strong> (<em>int</em><em>, </em><em>optional</em>) – Current epoch number. Defaults to 1.</p></li>
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True enter Hypertuning mode. Defaults to False.</p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True log history. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sudoai.trainer.</span></span><span class="sig-name descname"><span class="pre">Word2WordTrainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">model:</span> <span class="pre">sudoai.models.word.Word2Word</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'0.1.0'</span></em>, <em class="sig-param"><span class="pre">teacher_forcing_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></em>, <em class="sig-param"><span class="pre">hidden_size:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">512</span></em>, <em class="sig-param"><span class="pre">print_every:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">30000</span></em>, <em class="sig-param"><span class="pre">lr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0001</span></em>, <em class="sig-param"><span class="pre">epochs:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">2</span></em>, <em class="sig-param"><span class="pre">drop_out:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.1</span></em>, <em class="sig-param"><span class="pre">do_eval:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_save:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">do_shuffle:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">split_ratio:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.2</span></em>, <em class="sig-param"><span class="pre">do_save_checkpoint:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">continue_from_checkpoint:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">loss:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'nll'</span></em>, <em class="sig-param"><span class="pre">optimizer:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'rmsprop'</span></em>, <em class="sig-param"><span class="pre">momentum:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">wandb:</span> <span class="pre">&lt;module</span> <span class="pre">'wandb'</span> <span class="pre">from</span> <span class="pre">'c:\\anaconda3\\lib\\site-packages\\wandb\\__init__.py'&gt;</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">wandb_key:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">base_path:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sudoai.trainer.Trainer" title="sudoai.trainer.core.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">sudoai.trainer.core.Trainer</span></code></a></p>
+<p>Word to Word Trainer class.</p>
+<p>Trainer for word to word model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Word To Word model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Word2Word</span></code>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model version. Defaults to ‘0.1.0’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.teacher_forcing_ratio">
+<span class="sig-name descname"><span class="pre">teacher_forcing_ratio</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.teacher_forcing_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Teacher Forcing ratio for acceleration. Defaults to 0.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.hidden_size">
+<span class="sig-name descname"><span class="pre">hidden_size</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.hidden_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hidden size of the model. Defaults to 512.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.print_every">
+<span class="sig-name descname"><span class="pre">print_every</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.print_every" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log frequency result by steps (log result every 30000 steps). Defaults to 30000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.lr">
+<span class="sig-name descname"><span class="pre">lr</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.lr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn rate value. Defaults to 0.0001.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.epochs">
+<span class="sig-name descname"><span class="pre">epochs</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.epochs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of epochs. Defaults to 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.drop_out">
+<span class="sig-name descname"><span class="pre">drop_out</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.drop_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop out value. Defaults to 0.1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.do_eval">
+<span class="sig-name descname"><span class="pre">do_eval</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.do_eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True evaluate. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.do_save">
+<span class="sig-name descname"><span class="pre">do_save</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.do_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save the model when training ends. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.do_shuffle">
+<span class="sig-name descname"><span class="pre">do_shuffle</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.do_shuffle" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True shuffle the dataset. Defaults to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.split_ratio">
+<span class="sig-name descname"><span class="pre">split_ratio</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.split_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.do_save_checkpoint">
+<span class="sig-name descname"><span class="pre">do_save_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.do_save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True save checkpoint every epoch. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.continue_from_checkpoint">
+<span class="sig-name descname"><span class="pre">continue_from_checkpoint</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.continue_from_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of checkpoint as start point. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.loss">
+<span class="sig-name descname"><span class="pre">loss</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss function. Defaults to ‘nll’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizer function. Defaults to ‘rmsprop’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.momentum">
+<span class="sig-name descname"><span class="pre">momentum</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.momentum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Momentum value for optimizer. Defaults to 0.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.wandb">
+<span class="sig-name descname"><span class="pre">wandb</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.wandb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb class to track logs. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>wandb, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.wandb_key">
+<span class="sig-name descname"><span class="pre">wandb_key</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.wandb_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wandb api key. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.base_path">
+<span class="sig-name descname"><span class="pre">base_path</span></span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.base_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base path to save checkpoint and model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information about wandb check pytorch docs <a class="reference external" href="https://docs.wandb.ai/guides/integrations/pytorch">https://docs.wandb.ai/guides/integrations/pytorch</a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.data_process">
+<span class="sig-name descname"><span class="pre">data_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.data_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process dataset.</p>
+<p>Split data for training and evaluation.
+:param test_mode: If True enter in test mode. Defaults to False.
+:type test_mode: bool, optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception</strong> – when dataset is too small.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict with data for training and evaluation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visual evaluation process for random input from dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – number of item to evaluate. Defaults to 10.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save model with id and version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path of model saved to.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.save_checkpoint">
+<span class="sig-name descname"><span class="pre">save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_loss_avg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.save_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save checkpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_epoch</strong> (<em>int</em>) – Current epoch number.</p></li>
+<li><p><strong>train_loss_avg</strong> (<em>float</em>) – Current average training loss .</p></li>
+<li><p><strong>eval_loss_avg</strong> (<em>float</em><em>, </em><em>optional</em>) – Current average evaluation loss. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entry point to begin the training process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in HyperParameter mode. Defaults to False.</p></li>
+<li><p><strong>test_mode</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True process in test mode</p></li>
+<li><p><strong>mode to try with small amount of data</strong><strong>)</strong><strong> Defaults to False.</strong> (<em>(</em><em>Test</em>) – </p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logs all steps for reporting. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your dataset is too small (less then 100) and you chose test mode,
+an Exception raised.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sudoai.trainer.ModelError" title="sudoai.trainer.ModelError"><strong>ModelError</strong></a> – when model is None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sudoai.trainer.Word2WordTrainer.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyperparam</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_history</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sudoai.trainer.Word2WordTrainer.steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train</strong> (<em>dict</em>) – Dict with data for training and evaluation.</p></li>
+<li><p><strong>num_epoch</strong> (<em>int</em><em>, </em><em>optional</em>) – Current epoch number. Defaults to 1.</p></li>
+<li><p><strong>hyperparam</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True enter Hypertuning mode. Defaults to False.</p></li>
+<li><p><strong>log_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True log history. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>accuracy and loss.
+list: Log History.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="sudoai.pipeline.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Pipeline</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="sudoai.hypertuning.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Hypertuning</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Trainer</a><ul>
+<li><a class="reference internal" href="#module-sudoai.trainer">Module Content</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    </body>
+</html>
