@@ -6,6 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
+SPHINXBUILDV = sphinx-multiversion
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -38,6 +39,7 @@ help:
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 	@echo "  markdown   to make markdown files"
+	@echo "  v   		to make html files with versions"
 
 clean:
 	-rm -rf $(BUILDDIR)/*
@@ -157,3 +159,8 @@ markdown:
 	$(SPHINXBUILD) -M markdown $(ALLSPHINXOPTS) $(BUILDDIR)/markdown
 	@echo
 	@echo "Build finished. The markdown files are in $(BUILDDIR)/markdown."
+
+v:
+	$(SPHINXBUILDV) . $(BUILDDIR)/html_v
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html_v."
