@@ -22,7 +22,7 @@ class EncoderRNN(nn.Module):
             input_size (int): input size
             hidden_size (int): number of hidden layers
         """
-        super(EncoderRNN, self).__init__()
+        super().__init__()
         self.hidden_size = hidden_size
 
         self.embedding = nn.Embedding(input_size, hidden_size)
@@ -48,7 +48,7 @@ class AttnDecoderRNN(nn.Module):
             dropout_p (float, optional): dropout value. Defaults to 0.1.
             max_length ([type], optional): max length. Defaults to MAX_LENGTH.
         """
-        super(AttnDecoderRNN, self).__init__()
+        super().__init__()
         self.hidden_size = hidden_size
         self.output_size = output_size
         self.dropout_p = dropout_p

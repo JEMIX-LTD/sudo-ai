@@ -73,7 +73,7 @@ class HybridXMLTC(BasicModule):
         Raises:
             ValueError: When optimizer code not exist. ['adam', 'sgd','rmsprop']
         """
-        super(HybridXMLTC, self).__init__(name, version)
+        super().__init__(name, version)
 
         self.n_class = n_class
         self.vocab_size = vocab_size

@@ -58,7 +58,7 @@ class BasicModule(nn.Module):
             name (str, optional): Model identifier. Defaults to 'default'.
             version (str, optional): Model version. Defaults to '0.1.0'.
         """
-        super(BasicModule, self).__init__()
+        super().__init__()
         self.version = version
         self.name = name
 

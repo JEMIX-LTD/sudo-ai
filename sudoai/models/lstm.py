@@ -26,7 +26,7 @@ class ExtremMutliLabelTextClassification(nn.Module):
                  d_a=256,
                  multiclass=False):
 
-        super(ExtremMutliLabelTextClassification, self).__init__()
+        super().__init__()
         self.embedding_size = embedding_size
         self.num_labels = n_class
         self.max_seq = MAX_WORDS

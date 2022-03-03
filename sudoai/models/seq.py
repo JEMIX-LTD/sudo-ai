@@ -81,7 +81,7 @@ class Seq2Label(BasicModule):
             ValueError: When optimizer code not exist. ['adam', 'sgd','rmsprop']
             ValueError: When loss code not exist. ['nll', 'crossentropy']
         """
-        super(Seq2Label, self).__init__(name, version)
+        super().__init__(name, version)
         self.vocab_size = vocab_size
         self.n_class = n_class
         self.hidden_size = hidden_size

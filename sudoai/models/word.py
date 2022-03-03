@@ -80,7 +80,7 @@ class Word2Word(BasicModule):
             ValueError: When optimizer code not exist. ['adam', 'sgd','rmsprop']
             ValueError: When loss code not exist. ['nll', 'crossentropy']
         """
-        super(Word2Word, self).__init__(name, version)
+        super().__init__(name, version)
 
         self.optimizer_type = optimizer.lower()
         self.loss = loss.lower()
@@ -337,7 +337,7 @@ class Word2Label(BasicModule):
             ValueError: When optimizer code not exist. ['adam', 'sgd','rmsprop']
             ValueError: When loss code not exist. ['nll', 'crossentropy']
         """
-        super(Word2Word, self).__init__(name, version)
+        super().__init__(name, version)
         self.optimizer_type = optimizer.lower()
         self.loss = loss.lower()
         self.max_length = MAX_LENGTH
