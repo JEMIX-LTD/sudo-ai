@@ -11,6 +11,9 @@ from setuptools import find_packages, setup
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 setup(
     name="sudoai",
     version="0.1.2",
@@ -31,18 +34,7 @@ setup(
     ],
     include_package_data=True,
     packages=find_packages(),
-    install_requires=[
-        "torch==1.8.1",
-        "tqdm==4.48.2",
-        "numpy==1.19.2",
-        "fasttext==0.9.2",
-        "requests==2.24.0",
-        "torchmetrics==0.3.2",
-        "PyDrive==1.3.1",
-        'ax-platform==0.1.20',
-        'wandb==0.10.31',
-        "dash==1.20.0",
-    ],
+    install_requires= requirements,
     extras_require={
         'reports': [
             "dash-daq==0.5.0",
