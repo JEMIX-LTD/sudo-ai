@@ -147,7 +147,8 @@ class DatasetInfo():
 
     Attributes:
         id (str): Dataset identifier.
-        data_path (str): Path of data file.
+        train_path (str): Path of train data file.
+        valid_path (str): Path of valid data file.
         version (str, optional): Dataset version. Defaults to "0.1.0".
         description (str, optional): Dataset description. Defaults to None.
         str_text (str, optional): Column name of text (json, excel or csv). Default to 'text'.
@@ -178,7 +179,8 @@ class DatasetInfo():
 
     """
     id: str
-    data_path: str
+    train_path: str
+    valid_path: str
     version: str = '0.1.0'
     description: str = None
     str_text: str = 'text'
@@ -247,12 +249,17 @@ class Dataset():
             TypeError: If dataset_type not set.
         """
         self.info = info
-        self.data = []
-        self.plain_data = []
+        self.train = []
+        self.train_plain = []
+        self.valid = []
+        self.valid_plain = []
 
-        if not os.path.exists(self.info.data_path):
+        if not os.path.exists(self.info.train_path):
             raise DatasetError(
-                self, f'data file : [{self.info.data_path}] not exist.')
+                self, f'train data file : [{self.info.train_path}] not exist.')
+        if not os.path.exists(self.info.valid_path):
+            raise DatasetError(
+                self, f'valid data file : [{self.info.valid_path}] not exist.')
 
         if self.info.dataset_type == DatasetType.TEXT:
             if 'tokenizer' in kwargs:
@@ -417,33 +424,41 @@ class Dataset():
         """
         return len(self.data)
 
-    def __getitem__(self, idx: int, plain: bool = False):
+    def __getitem__(self, idx: int, plain: bool = False, val=False):
         """Get data from index.
 
         Args:
             idx (int): Index.
             plain (bool, optional): If True return plain text else return indexs. Defaults to False.
+            val (bool, optional): If True return plain validate text else return train plain text. Defaults to False.
 
         Returns:
             `torch.Tensor`: Index from tokens.
             str: Plain text.
         """
+
+        if val:
+            if plain:
+                return self.valid_plain[idx]
+            return self.valid[idx]
+
         if plain:
-            return self.plain_data[idx]
-        return self.data[idx]
+            return self.train_plain[idx]
+        return self.train[idx]
 
-    def __call__(self, idx: int, plain: bool = False):
+    def __call__(self, idx: int, plain: bool = False, val: bool = False):
         """Get data from index.
 
         Args:
             idx (int): Index.
             plain (bool, optional): If True return plain text else return indexs. Defaults to False.
+            val (bool, optional): If True return plain validate text else return train plain text. Defaults to False.
 
         Returns:
             `torch.Tensor`: Index from tokens.
             str: Plain text.
         """
-        return self.__getitem__(idx, plain)
+        return self.__getitem__(idx, plain, val)
 
     def __iter__(self):
         """Initialize the iterator.
@@ -527,12 +542,12 @@ class Dataset():
         """Get texts from data file. """
 
         if self.info.data_type == DataType.TEXT:
-            with open(self.info.data_path, mode='r+b') as f:
+            with open(self.info.train_path, mode='r+b') as f:
                 with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as fm:
 
                     if self.info.verbose == 1:
                         lines = tqdm(iter(fm.readline, b""),
-                                     desc='build dataset',
+                                     desc='build dataset (train)',
                                      unit=' lines')
                     else:
                         lines = iter(fm.readline, b"")
@@ -540,62 +555,121 @@ class Dataset():
                     for line in lines:
                         if len(line.split(' ')) >= self.info.max_length:
                             continue
-                        self.plain_data.append(convert_to_unicode(line))
-                        self.data.append(self.data_to_tensor(line))
+                        self.train_plain.append(convert_to_unicode(line))
+                        self.train.append(self.data_to_tensor(line))
+
+            with open(self.info.valid_path, mode='r+b') as f:
+                with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as fm:
+
+                    if self.info.verbose == 1:
+                        lines = tqdm(iter(fm.readline, b""),
+                                     desc='build dataset (valid)',
+                                     unit=' lines')
+                    else:
+                        lines = iter(fm.readline, b"")
+
+                    for line in lines:
+                        if len(line.split(' ')) >= self.info.max_length:
+                            continue
+                        self.valid_plain.append(convert_to_unicode(line))
+                        self.valid.append(self.data_to_tensor(line))
 
         elif self.info.data_type == DataType.CSV:
-            data = pd.read_csv(self.info.data_path,
-                               encoding=self.info.encoding, sep=self.info.sep)
+
+            data = pd.read_csv(self.info.train_path,
+                               encoding=self.info.encoding, 
+                               sep=self.info.sep)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
 
             for x in data:
                 line = x[1][self.info.str_text]
                 if len(line.split(' ')) >= self.info.max_length:
                     continue
-                self.plain_data.append(convert_to_unicode(line))
-                self.data.append(self.data_to_tensor(line))
+                self.train_plain.append(convert_to_unicode(line))
+                self.train.append(self.data_to_tensor(line))
+
+            data = pd.read_csv(self.info.valid_path,
+                               encoding=self.info.encoding, 
+                               sep=self.info.sep)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (valid))', unit=' lines')
+
+            for x in data:
+                line = x[1][self.info.str_text]
+                if len(line.split(' ')) >= self.info.max_length:
+                    continue
+                self.valid_plain.append(convert_to_unicode(line))
+                self.valid.append(self.data_to_tensor(line))
 
         elif self.info.data_type == DataType.JSON:
-            data = pd.read_json(self.info.data_path,
+            data = pd.read_json(self.info.train_path,
                                 encoding=self.info.encoding)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
 
             for x in data:
                 line = x[1][self.info.str_text]
                 if len(line.split(' ')) >= self.info.max_length:
                     continue
 
-                self.plain_data.append(convert_to_unicode(line))
-                self.data.append(self.data_to_tensor(line))
+                self.train_plain.append(convert_to_unicode(line))
+                self.train.append(self.data_to_tensor(line))
 
-        elif self.info.data_type == DataType.EXCEL:
-            data = pd.read_excel(self.info.data_path)
+            data = pd.read_json(self.info.valid_path,
+                                encoding=self.info.encoding)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (valid)', unit=' lines')
 
             for x in data:
                 line = x[1][self.info.str_text]
                 if len(line.split(' ')) >= self.info.max_length:
                     continue
 
-                self.plain_data.append(convert_to_unicode(line))
-                self.data.append(self.data_to_tensor(line))
+                self.valid_plain.append(convert_to_unicode(line))
+                self.valid.append(self.data_to_tensor(line))
+
+        elif self.info.data_type == DataType.EXCEL:
+            data = pd.read_excel(self.info.train_path)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
+
+            for x in data:
+                line = x[1][self.info.str_text]
+                if len(line.split(' ')) >= self.info.max_length:
+                    continue
+
+                self.train_plain.append(convert_to_unicode(line))
+                self.train.append(self.data_to_tensor(line))
+
+            data = pd.read_excel(self.info.valid_path)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (valid)', unit=' lines')
+
+            for x in data:
+                line = x[1][self.info.str_text]
+                if len(line.split(' ')) >= self.info.max_length:
+                    continue
+
+                self.valid_plain.append(convert_to_unicode(line))
+                self.valid.append(self.data_to_tensor(line))
 
     def _get_str_to_label(self) -> None:
         """Get texts and labels from data file. """
 
         if self.info.data_type == DataType.TEXT:
-            with open(self.info.data_path, mode='r+b') as f:
+            with open(self.info.train_path, mode='r+b') as f:
                 with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as fm:
 
                     if self.info.verbose == 1:
                         lines = tqdm(iter(fm.readline, b""),
-                                     desc='build dataset',
+                                     desc='build dataset (train)',
                                      unit=' lines')
                     else:
                         lines = iter(fm.readline, b"")
@@ -609,16 +683,39 @@ class Dataset():
                         )
                         if len(text.split(' ')) >= self.info.max_length:
                             continue
-                        self.plain_data.append((text, label))
-                        self.data.append((self.data_to_tensor(text),
+                        self.train_plain.append((text, label))
+                        self.train.append((self.data_to_tensor(text),
+                                          self.label_to_tensor(label)))
+            
+            with open(self.info.valid_path, mode='r+b') as f:
+                with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as fm:
+
+                    if self.info.verbose == 1:
+                        lines = tqdm(iter(fm.readline, b""),
+                                     desc='build dataset (valid)',
+                                     unit=' lines')
+                    else:
+                        lines = iter(fm.readline, b"")
+
+                    for line in lines:
+                        line = convert_to_unicode(line)
+
+                        text, label = line.split(self.info.sep)
+                        label = label.translate(str.maketrans(
+                            {'\t': '', '\r': '', '\n': '', ' ': ''})
+                        )
+                        if len(text.split(' ')) >= self.info.max_length:
+                            continue
+                        self.valid_plain.append((text, label))
+                        self.valid.append((self.data_to_tensor(text),
                                           self.label_to_tensor(label)))
 
         elif self.info.data_type == DataType.CSV:
-            data = pd.read_csv(self.info.data_path,
+            data = pd.read_csv(self.info.train_path,
                                encoding=self.info.encoding, sep=self.info.sep)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
 
             for x in data:
                 text, label = x[1][self.info.str_text], x[1][self.info.str_label]
@@ -629,16 +726,35 @@ class Dataset():
 
                 if len(text.split(' ')) >= self.info.max_length:
                     continue
-                self.plain_data.append((text, label))
-                self.data.append((self.data_to_tensor(text),
+                self.train_plain.append((text, label))
+                self.train.append((self.data_to_tensor(text),
+                                  self.label_to_tensor(label)))
+
+            data = pd.read_csv(self.info.valid_path,
+                               encoding=self.info.encoding, sep=self.info.sep)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (valid)', unit=' lines')
+
+            for x in data:
+                text, label = x[1][self.info.str_text], x[1][self.info.str_label]
+
+                label = label.translate(str.maketrans(
+                    {'\t': '', '\r': '', '\n': '', ' ': ''})
+                )
+
+                if len(text.split(' ')) >= self.info.max_length:
+                    continue
+                self.valid_plain.append((text, label))
+                self.valid.append((self.data_to_tensor(text),
                                   self.label_to_tensor(label)))
 
         elif self.info.data_type == DataType.JSON:
-            data = pd.read_json(self.info.data_path,
+            data = pd.read_json(self.info.train_path,
                                 encoding=self.info.encoding)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
 
             for x in data:
                 text, label = x[1][self.info.str_text], x[1][self.info.str_label]
@@ -649,15 +765,34 @@ class Dataset():
                     {'\t': '', '\r': '', '\n': '', ' ': ''})
                 )
 
-                self.plain_data.append((text, label))
-                self.data.append((self.data_to_tensor(text),
+                self.train_plain.append((text, label))
+                self.train.append((self.data_to_tensor(text),
+                                  self.label_to_tensor(label)))
+
+            data = pd.read_json(self.info.valid_path,
+                                encoding=self.info.encoding)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (valid)', unit=' lines')
+
+            for x in data:
+                text, label = x[1][self.info.str_text], x[1][self.info.str_label]
+                if len(text.split(' ')) >= self.info.max_length:
+                    continue
+
+                label = label.translate(str.maketrans(
+                    {'\t': '', '\r': '', '\n': '', ' ': ''})
+                )
+
+                self.valid_plain.append((text, label))
+                self.valid.append((self.data_to_tensor(text),
                                   self.label_to_tensor(label)))
 
         elif self.info.data_type == DataType.EXCEL:
-            data = pd.read_excel(self.info.data_path)
+            data = pd.read_excel(self.info.train_path)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
 
             for x in data:
                 text, label = x[1][self.info.str_text], x[1][self.info.str_label]
@@ -668,20 +803,38 @@ class Dataset():
                     {'\t': '', '\r': '', '\n': '', ' ': ''})
                 )
 
-                self.plain_data.append((text, label))
-                self.data.append((self.data_to_tensor(text),
+                self.train_plain.append((text, label))
+                self.train.append((self.data_to_tensor(text),
+                                  self.label_to_tensor(label)))
+
+            data = pd.read_excel(self.info.valid_path)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (valid)', unit=' lines')
+
+            for x in data:
+                text, label = x[1][self.info.str_text], x[1][self.info.str_label]
+                if len(text.split(' ')) >= self.info.max_length:
+                    continue
+
+                label = label.translate(str.maketrans(
+                    {'\t': '', '\r': '', '\n': '', ' ': ''})
+                )
+
+                self.valid_plain.append((text, label))
+                self.valid.append((self.data_to_tensor(text),
                                   self.label_to_tensor(label)))
 
     def _get_str_to_str(self) -> None:
         """Get src texts and target text from data file. """
 
         if self.info.data_type == DataType.TEXT:
-            with open(self.info.data_path, mode='r+b') as f:
+            with open(self.info.train_path, mode='r+b') as f:
                 with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as fm:
 
                     if self.info.verbose == 1:
                         lines = tqdm(iter(fm.readline, b""),
-                                     desc='build dataset',
+                                     desc='build dataset (train)',
                                      unit=' lines')
                     else:
                         lines = iter(fm.readline, b"")
@@ -694,15 +847,36 @@ class Dataset():
                         if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                             continue
 
-                        self.plain_data.append((src, target))
-                        self.data.append(self.data_to_tensor((src, target)))
+                        self.train_plain.append((src, target))
+                        self.train.append(self.data_to_tensor((src, target)))
+
+            with open(self.info.valid_path, mode='r+b') as f:
+                with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as fm:
+
+                    if self.info.verbose == 1:
+                        lines = tqdm(iter(fm.readline, b""),
+                                     desc='build dataset (valid)',
+                                     unit=' lines')
+                    else:
+                        lines = iter(fm.readline, b"")
+
+                    for line in lines:
+                        line = convert_to_unicode(line)
+
+                        src, target = line.split(self.info.sep)
+
+                        if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
+                            continue
+
+                        self.valid_plain.append((src, target))
+                        self.valid.append(self.data_to_tensor((src, target)))
 
         elif self.info.data_type == DataType.CSV:
-            data = pd.read_csv(self.info.data_path,
+            data = pd.read_csv(self.info.train_path,
                                encoding=self.info.encoding, sep=self.info.sep)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
 
             for x in data:
                 src, target = x[1][self.info.str_text], x[1][self.info.str_label]
@@ -710,15 +884,30 @@ class Dataset():
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
 
-                self.plain_data.append((src, target))
-                self.data.append(self.data_to_tensor((src, target)))
+                self.train_plain.append((src, target))
+                self.train.append(self.data_to_tensor((src, target)))
+
+            data = pd.read_csv(self.info.valid_path,
+                               encoding=self.info.encoding, sep=self.info.sep)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (valid)', unit=' lines')
+
+            for x in data:
+                src, target = x[1][self.info.str_text], x[1][self.info.str_label]
+
+                if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
+                    continue
+
+                self.valid_plain.append((src, target))
+                self.valid.append(self.data_to_tensor((src, target)))
 
         elif self.info.data_type == DataType.JSON:
-            data = pd.read_json(self.info.data_path,
+            data = pd.read_json(self.info.train_path,
                                 encoding=self.info.encoding)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
 
             for x in data:
                 src, target = x[1][self.info.str_text], x[1][self.info.str_label]
@@ -726,14 +915,14 @@ class Dataset():
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
 
-                self.plain_data.append((src, target))
-                self.data.append(self.data_to_tensor((src, target)))
-
-        elif self.info.data_type == DataType.EXCEL:
-            data = pd.read_excel(self.info.data_path)
+                self.train_plain.append((src, target))
+                self.train.append(self.data_to_tensor((src, target)))
+            
+            data = pd.read_json(self.info.valid_path,
+                                encoding=self.info.encoding)
             data = data.iterrows()
             if self.info.verbose == 1:
-                data = tqdm(data, desc='build dataset', unit=' lines')
+                data = tqdm(data, desc='build dataset (valid)', unit=' lines')
 
             for x in data:
                 src, target = x[1][self.info.str_text], x[1][self.info.str_label]
@@ -741,8 +930,37 @@ class Dataset():
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
 
-                self.plain_data.append((src, target))
-                self.data.append(self.data_to_tensor((src, target)))
+                self.valid_plain.append((src, target))
+                self.valid.append(self.data_to_tensor((src, target)))
+
+        elif self.info.data_type == DataType.EXCEL:
+            data = pd.read_excel(self.info.train_path)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (train)', unit=' lines')
+
+            for x in data:
+                src, target = x[1][self.info.str_text], x[1][self.info.str_label]
+
+                if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
+                    continue
+
+                self.train_plain.append((src, target))
+                self.train.append(self.data_to_tensor((src, target)))
+
+            data = pd.read_excel(self.info.valid_path)
+            data = data.iterrows()
+            if self.info.verbose == 1:
+                data = tqdm(data, desc='build dataset (valid)', unit=' lines')
+
+            for x in data:
+                src, target = x[1][self.info.str_text], x[1][self.info.str_label]
+
+                if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
+                    continue
+
+                self.valid_plain.append((src, target))
+                self.valid.append(self.data_to_tensor((src, target)))
 
     @classmethod
     def load(cls, id: str):

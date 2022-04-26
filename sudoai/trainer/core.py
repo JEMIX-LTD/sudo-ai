@@ -65,7 +65,6 @@ class Trainer():
         do_eval (bool, optional): If True evaluate. Defaults to False.
         do_save (bool, optional): If True save the model when training ends. Defaults to False.
         do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-        split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
         do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
         continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
         loss (str, optional): Loss function. Defaults to 'nll'.
@@ -92,7 +91,6 @@ class Trainer():
                  do_eval: bool = False,
                  do_save: bool = False,
                  do_shuffle: bool = True,
-                 split_ratio: float = 0.2,
                  do_save_checkpoint: bool = False,
                  continue_from_checkpoint: str = None,
                  loss: str = 'nll',
@@ -136,7 +134,6 @@ class Trainer():
         self.drop_out = drop_out
         self.do_save = do_save
         self.do_shuffle = do_shuffle
-        self.split_ratio = split_ratio
         self.do_save_checkpoint = do_save_checkpoint
         self.continue_from_checkpoint = continue_from_checkpoint
         self.loss = loss
@@ -267,8 +264,8 @@ class Trainer():
 
         for _ in range(n):
             number = random.randrange(1, size)
-            pair = self.dataset(number, True)
-            en_data = self.dataset(number)
+            pair = self.dataset(idx=number, plain=True, val=True)
+            en_data = self.dataset(number, val=True)
             en = en_data[0]
             en = en.cpu()
             outputs = self.model(en)
@@ -435,7 +432,8 @@ class Trainer():
         Returns:
             dict: Dict with data for training and evaluation.
         """
-        training_pairs = self.dataset.data
+        training_pairs = self.dataset.train
+        eval_pairs = self.dataset.valid
 
         if self.do_shuffle:
             random.shuffle(training_pairs)
@@ -453,14 +451,9 @@ class Trainer():
         iters = len(training_pairs)
 
         if self.do_eval:
-            eval_count = int(iters * self.split_ratio)
-            eval_pairs = training_pairs[:eval_count]
-            training_pairs = training_pairs[eval_count:]
             eval_iters = len(eval_pairs)
-            iters = len(training_pairs)
             return {'train': [iters, training_pairs], 'eval': [eval_iters, eval_pairs]}
 
-        iters = len(training_pairs)
         return {'train': [iters, training_pairs], 'eval': [0, []]}
 
     def save_checkpoint(self, num_epoch: int, train_loss_avg: float, eval_loss_avg: float = None) -> None:
@@ -606,7 +599,6 @@ class Word2WordTrainer(Trainer):
             do_eval (bool, optional): If True evaluate. Defaults to False.
             do_save (bool, optional): If True save the model when training ends. Defaults to False.
             do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-            split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
             do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
             continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
             loss (str, optional): Loss function. Defaults to 'nll'.
@@ -667,7 +659,6 @@ class Seq2LabelTrainer(Trainer):
         do_eval (bool, optional): If True evaluate. Defaults to False.
         do_save (bool, optional): If True save the model when training ends. Defaults to False.
         do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-        split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
         do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
         continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
         loss (str, optional): Loss function. Defaults to 'nll'.
@@ -695,7 +686,6 @@ class Seq2LabelTrainer(Trainer):
                  do_eval: bool = False,
                  do_save: bool = False,
                  do_shuffle: bool = True,
-                 split_ratio: float = 0.2,
                  do_save_checkpoint: bool = False,
                  continue_from_checkpoint: str = None,
                  loss: str = 'nll',
@@ -719,7 +709,6 @@ class Seq2LabelTrainer(Trainer):
             do_eval (bool, optional): If True evaluate. Defaults to False.
             do_save (bool, optional): If True save the model when training ends. Defaults to False.
             do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-            split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
             do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
             continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
             loss (str, optional): Loss function. Defaults to 'nll'.
@@ -734,7 +723,7 @@ class Seq2LabelTrainer(Trainer):
                          print_every=print_every, do_eval=do_eval, hidden_size=hidden_size,
                          lr=lr, epochs=epochs, version=version, drop_out=drop_out,
                          do_save=do_save, do_save_checkpoint=do_save_checkpoint, id=id,
-                         do_shuffle=do_shuffle, split_ratio=split_ratio, optimizer=optimizer,
+                         do_shuffle=do_shuffle, optimizer=optimizer,
                          continue_from_checkpoint=continue_from_checkpoint, loss=loss,
                          momentum=momentum, base_path=base_path, wandb=wandb)
 
@@ -783,7 +772,6 @@ class TokenClassificationTrainer(Trainer):
         do_eval (bool, optional): If True evaluate. Defaults to False.
         do_save (bool, optional): If True save the model when training ends. Defaults to False.
         do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-        split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
         do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
         continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
         loss (str, optional): Loss function. Defaults to 'nll'.
@@ -811,7 +799,6 @@ class TokenClassificationTrainer(Trainer):
                  do_eval: bool = False,
                  do_save: bool = False,
                  do_shuffle: bool = True,
-                 split_ratio: float = 0.2,
                  do_save_checkpoint: bool = False,
                  continue_from_checkpoint: str = None,
                  loss: str = 'nll',
@@ -835,7 +822,6 @@ class TokenClassificationTrainer(Trainer):
             do_eval (bool, optional): If True evaluate. Defaults to False.
             do_save (bool, optional): If True save the model when training ends. Defaults to False.
             do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-            split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
             do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
             continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
             loss (str, optional): Loss function. Defaults to 'nll'.
@@ -850,7 +836,7 @@ class TokenClassificationTrainer(Trainer):
                          print_every=print_every, do_eval=do_eval, hidden_size=hidden_size,
                          lr=lr, epochs=epochs, version=version, drop_out=drop_out,
                          do_save=do_save, do_save_checkpoint=do_save_checkpoint, id=id,
-                         do_shuffle=do_shuffle, split_ratio=split_ratio, optimizer=optimizer,
+                         do_shuffle=do_shuffle, optimizer=optimizer,
                          continue_from_checkpoint=continue_from_checkpoint, loss=loss,
                          momentum=momentum, base_path=base_path, wandb=wandb)
 
@@ -899,7 +885,6 @@ class HybridXMLTrainer(Trainer):
         do_eval (bool, optional): If True evaluate. Defaults to False.
         do_save (bool, optional): If True save the model when training ends. Defaults to False.
         do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-        split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
         do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
         continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
         loss (str, optional): Loss function. Defaults to 'nll'.
@@ -928,7 +913,6 @@ class HybridXMLTrainer(Trainer):
                  do_eval: bool = False,
                  do_save: bool = False,
                  do_shuffle: bool = True,
-                 split_ratio: float = 0.2,
                  do_save_checkpoint: bool = False,
                  continue_from_checkpoint: str = None,
                  loss: str = 'nll',
@@ -953,7 +937,6 @@ class HybridXMLTrainer(Trainer):
             do_eval (bool, optional): If True evaluate. Defaults to False.
             do_save (bool, optional): If True save the model when training ends. Defaults to False.
             do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-            split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
             do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
             continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
             loss (str, optional): Loss function. Defaults to 'nll'.
@@ -972,7 +955,7 @@ class HybridXMLTrainer(Trainer):
                          print_every=print_every, do_eval=do_eval, hidden_size=hidden_size,
                          lr=lr, epochs=epochs, version=version, drop_out=drop_out,
                          do_save=do_save, do_save_checkpoint=do_save_checkpoint, id=id,
-                         do_shuffle=do_shuffle, split_ratio=split_ratio, optimizer=optimizer,
+                         do_shuffle=do_shuffle, optimizer=optimizer,
                          continue_from_checkpoint=continue_from_checkpoint, loss=loss,
                          momentum=momentum, base_path=base_path, wandb=wandb)
 

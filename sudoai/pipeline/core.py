@@ -323,7 +323,7 @@ class Pipeline():
             output = self.model(inputs)
             if self.config.i2l is not None:
                 if len(output) > 1:
-                    return self.config.i2l[ str(output[1])  ]
+                    return self.config.i2l[str(output[1])]
                 return self.config.i2l[output]
             else:
                 return output
