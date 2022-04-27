@@ -84,7 +84,7 @@ class Trainer():
                  version: str = '0.1.0',
                  teacher_forcing_ratio: float = 0.5,
                  hidden_size: int = 512,
-                 print_every: int = 30000,
+                 print_every: int = 100,
                  lr: float = 0.0001,
                  epochs: int = 2,
                  drop_out: float = 0.1,
@@ -331,14 +331,10 @@ class Trainer():
                 print_acc_avg = sum(
                     history['acc']['train']) / len(history['acc']['train'])
 
-                p = f'{iter / n_iters * 100:.2f}'
                 a = print_acc_avg
                 lo = print_loss_avg
 
-                progress_bar.set_postfix_str(f'({iter} {p}% ) acc : {a:.4f} loss : {lo:.4f}')
-
-                # sudoai.__log__.info(
-                #     f'({iter} {p}% ) acc : {a:.4f} loss : {lo:.4f}')
+                progress_bar.set_postfix_str(f'acc : {a:.4f} loss : {lo:.4f}')
 
             print_every += 1
 
@@ -371,14 +367,10 @@ class Trainer():
                     print_eval_acc_avg = sum(
                         history['acc']['eval']) / len(history['acc']['eval'])
 
-                    p = f'{iter / eval_iters * 100:.2f}'
                     a = print_eval_acc_avg
                     lo = print_eval_loss_avg
 
-                    eval_progress_bar.set_postfix_str(f'({iter} {p}% ) acc : {a:.4f} loss : {lo:.4f}')
-
-                    # sudoai.__log__.info(
-                    #     f'({iter} {a}%) val_acc : {a:.4f} val_loss : {lo:.4f}')
+                    eval_progress_bar.set_postfix_str(f' val_acc : {a:.4f} val_loss : {lo:.4f}')
 
                 print_every += 1
 
@@ -575,7 +567,7 @@ class Word2WordTrainer(Trainer):
                  version: str = '0.1.0',
                  teacher_forcing_ratio: float = 0.5,
                  hidden_size: int = 512,
-                 print_every: int = 30000,
+                 print_every: int = 100,
                  lr: float = 0.0001,
                  epochs: int = 2,
                  drop_out: float = 0.1,
@@ -686,7 +678,7 @@ class Seq2LabelTrainer(Trainer):
                  version: str = '0.1.0',
                  teacher_forcing_ratio: float = 0.5,
                  hidden_size: int = 512,
-                 print_every: int = 30000,
+                 print_every: int = 100,
                  lr: float = 0.0001,
                  epochs: int = 2,
                  drop_out: float = 0.1,
@@ -799,7 +791,7 @@ class TokenClassificationTrainer(Trainer):
                  version: str = '0.1.0',
                  teacher_forcing_ratio: float = 0.5,
                  hidden_size: int = 512,
-                 print_every: int = 30000,
+                 print_every: int = 100,
                  lr: float = 0.0001,
                  epochs: int = 2,
                  drop_out: float = 0.1,
@@ -913,7 +905,7 @@ class HybridXMLTrainer(Trainer):
                  version: str = '0.1.0',
                  teacher_forcing_ratio: float = 0.5,
                  hidden_size: int = 512,
-                 print_every: int = 30000,
+                 print_every: int = 100,
                  lr: float = 0.0001,
                  epochs: int = 2,
                  drop_out: float = 0.1,
@@ -1015,7 +1007,8 @@ class HybridXMLTrainer(Trainer):
             random.shuffle(train['eval'][1])
 
         n_iters = train['train'][0]
-        for iter in tqdm(range(n_iters), desc=f'train epoch {num_epoch}'):
+        progress_bar = tqdm(range(n_iters), desc=f'train epoch {num_epoch}')
+        for iter in progress_bar:
             training_pair = train['train'][1][iter]
             input_tensor = training_pair[0].to(DEVICE)
             labels_tensor = training_pair[1].to(DEVICE)
@@ -1037,12 +1030,11 @@ class HybridXMLTrainer(Trainer):
                 print_acc_avg = sum(
                     history['acc']['train']) / len(history['acc']['train'])
 
-                p = f'{iter / n_iters * 100:.2f}'
                 a = print_acc_avg
                 lo = print_loss_avg
 
-                sudoai.__log__.info(
-                    f'({iter} {p}% ) acc : {a:.4f} loss : {lo:.4f}')
+                progress_bar.set_postfix_str(
+                    f' acc : {a:.4f} loss : {lo:.4f}')
 
             print_every += 1
 
@@ -1056,7 +1048,8 @@ class HybridXMLTrainer(Trainer):
             eval_iters = train['eval'][0]
             print_every = 0
 
-            for iter in tqdm(range(eval_iters), desc=f'eval epoch {num_epoch}'):
+            eval_progress_bar = tqdm(range(eval_iters), desc=f'eval epoch {num_epoch}')
+            for iter in eval_progress_bar:
                 eval_pair = train['eval'][1][iter]
                 input_tensor = eval_pair[0].to(DEVICE)
                 target_tensor = eval_pair[1].to(DEVICE)
@@ -1075,12 +1068,10 @@ class HybridXMLTrainer(Trainer):
                     print_eval_acc_avg = sum(
                         history['acc']['eval']) / len(history['acc']['eval'])
 
-                    p = f'{iter / eval_iters * 100:.2f}'
                     a = print_eval_acc_avg
                     lo = print_eval_loss_avg
 
-                    sudoai.__log__.info(
-                        f'({iter} {a}%) val_acc : {a:.4f} val_loss : {lo:.4f}')
+                    eval_progress_bar.set_postfix_str(f' val_acc : {a:.4f} val_loss : {lo:.4f}')
 
                 print_every += 1
 
