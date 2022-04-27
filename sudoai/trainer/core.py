@@ -235,6 +235,8 @@ class Trainer():
                     data, num_epoch, hyperparam, log_history))
             else:
                 self.steps(data, num_epoch, hyperparam, log_history)
+            if self.do_save:
+                self.save()
 
         if self.do_save:
             self.model.eval()
@@ -306,10 +308,11 @@ class Trainer():
 
         if self.do_shuffle:
             random.shuffle(train['train'][1])
-            random.shuffle(train['eval'][1])
+            # random.shuffle(train['eval'][1])
 
         n_iters = train['train'][0]
-        for iter in tqdm(range(n_iters), desc=f'train epoch {num_epoch}'):
+        progress_bar = tqdm(range(n_iters), desc=f'train epoch {num_epoch}')
+        for iter in progress_bar:
             training_pair = train['train'][1][iter]
             input_tensor = training_pair[0].to(DEVICE)
             target_tensor = training_pair[1].to(DEVICE)
@@ -332,8 +335,10 @@ class Trainer():
                 a = print_acc_avg
                 lo = print_loss_avg
 
-                sudoai.__log__.info(
-                    f'({iter} {p}% ) acc : {a:.4f} loss : {lo:.4f}')
+                progress_bar.set_postfix_str(f'({iter} {p}% ) acc : {a:.4f} loss : {lo:.4f}')
+
+                # sudoai.__log__.info(
+                #     f'({iter} {p}% ) acc : {a:.4f} loss : {lo:.4f}')
 
             print_every += 1
 
@@ -346,8 +351,8 @@ class Trainer():
         if self.do_eval:
             eval_iters = train['eval'][0]
             print_every = 0
-
-            for iter in tqdm(range(eval_iters), desc=f'eval epoch {num_epoch}'):
+            eval_progress_bar = tqdm(range(eval_iters), desc=f'eval epoch {num_epoch}')
+            for iter in eval_progress_bar:
                 eval_pair = train['eval'][1][iter]
                 input_tensor = eval_pair[0].to(DEVICE)
                 target_tensor = eval_pair[1].to(DEVICE)
@@ -370,8 +375,10 @@ class Trainer():
                     a = print_eval_acc_avg
                     lo = print_eval_loss_avg
 
-                    sudoai.__log__.info(
-                        f'({iter} {a}%) val_acc : {a:.4f} val_loss : {lo:.4f}')
+                    eval_progress_bar.set_postfix_str(f'({iter} {p}% ) acc : {a:.4f} loss : {lo:.4f}')
+
+                    # sudoai.__log__.info(
+                    #     f'({iter} {a}%) val_acc : {a:.4f} val_loss : {lo:.4f}')
 
                 print_every += 1
 
