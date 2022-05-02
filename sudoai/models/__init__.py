@@ -106,3 +106,12 @@ class BasicModule(nn.Module):
         torch.save(self.state_dict(), model_path)
         save_config(self, True)
         return folder_name
+    
+    def local_save(self, run_id, epoch):
+        folder_name = os.path.join('runs', run_id, epoch)
+        model_path = os.path.join(folder_name, 'model.bin')
+        os.makedirs(folder_name, exist_ok=True)
+
+        torch.save(self.state_dict(), model_path)
+        save_config(self, True, True, folder_name)
+

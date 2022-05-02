@@ -22,6 +22,7 @@ from ..models.word import Word2Label, Word2Word
 from ..models.xmltc import HybridXMLTC
 from ..utils import DEVICE, load_checkpoint, load_dataset, save_checkpoint
 import torch
+import uuid
 
 
 class ModelError(Exception):
@@ -73,6 +74,7 @@ class Trainer():
         momentum (float, optional): Momentum value for optimizer. Defaults to 0.0.
         wandb (wandb, optional): Wandb class to track logs. Defaults to None.
         wandb_key (str, optional): Wandb api key. Defaults to None.
+        save_runs (bool, optional): If True save runs. Defaults to False.
         base_path (str, optional): Base path to save checkpoint and model. Defaults to None.
 
     See Also:
@@ -99,6 +101,7 @@ class Trainer():
                  momentum: float = 0.0,
                  wandb: wandb = None,
                  wandb_key: str = None,
+                 save_runs: bool = True,
                  base_path: str = None) -> None:
         """Create a Trainer class.
 
@@ -146,6 +149,7 @@ class Trainer():
         self.dataset = None
         self.wandb = wandb
         self.wandb_key = wandb_key
+        self.save_runs = save_runs
 
     def save(self) -> str:
         """Save model with id and version.
@@ -156,6 +160,9 @@ class Trainer():
         path = self.model.save()
         sudoai.__log__.info(f'model {self.id} saved')
         return path
+    
+    def save_local(self, run_id, epoch):
+        self.model.local_save(run_id, epoch)
 
     def start(self, hyperparam: bool = False, test_mode: bool = False, log_history: bool = False):
         """Entry point to begin the training process.
@@ -229,10 +236,11 @@ class Trainer():
 
         if hyperparam:
             return self.steps(data, 1, hyperparam, log_history)
+        
+        run_id = str(uuid.uuid4()) 
 
         for num_epoch in range(1, self.epochs + 1):
-            if DEVICE == 'cuda':
-                torch.cuda.synchronize()
+
             if log_history:
                 history.append(self.steps(
                     data, num_epoch, hyperparam, log_history))
@@ -240,6 +248,9 @@ class Trainer():
                 self.steps(data, num_epoch, hyperparam, log_history)
             if self.do_save:
                 self.save()
+
+            if self.save_runs:
+                self.save_local(run_id, str(num_epoch))
 
         if self.do_save:
             self.model.eval()
@@ -315,6 +326,10 @@ class Trainer():
 
         n_iters = train['train'][0]
         progress_bar = tqdm(range(n_iters), desc=f'train epoch {num_epoch}')
+
+        if DEVICE == 'cuda':
+            torch.cuda.synchronize()
+
         for iter in progress_bar:
             training_pair = train['train'][1][iter]
             input_tensor = training_pair[0].to(DEVICE)
@@ -341,6 +356,9 @@ class Trainer():
 
             print_every += 1
 
+        if DEVICE == 'cuda':
+            torch.cuda.synchronize()
+
         train_loss_avg = sum(history['loss']['train']) / \
             len(history['loss']['train'])
 
@@ -350,7 +368,8 @@ class Trainer():
         if self.do_eval:
             eval_iters = train['eval'][0]
             print_every = 0
-            eval_progress_bar = tqdm(range(eval_iters), desc=f'eval epoch {num_epoch}')
+            eval_progress_bar = tqdm(
+                range(eval_iters), desc=f'eval epoch {num_epoch}')
             for iter in eval_progress_bar:
                 eval_pair = train['eval'][1][iter]
                 input_tensor = eval_pair[0].to(DEVICE)
@@ -373,7 +392,8 @@ class Trainer():
                     a = print_eval_acc_avg
                     lo = print_eval_loss_avg
 
-                    eval_progress_bar.set_postfix_str(f' val_acc : {a:.4f} val_loss : {lo:.4f}')
+                    eval_progress_bar.set_postfix_str(
+                        f' val_acc : {a:.4f} val_loss : {lo:.4f}')
 
                 print_every += 1
 
@@ -557,6 +577,7 @@ class Word2WordTrainer(Trainer):
         momentum (float, optional): Momentum value for optimizer. Defaults to 0.0.
         wandb (wandb, optional): Wandb class to track logs. Defaults to None.
         wandb_key (str, optional): Wandb api key. Defaults to None.
+        save_runs (bool, optional): If True save runs. Defaults to False.
         base_path (str, optional): Base path to save checkpoint and model. Defaults to None.
 
     See Also:
@@ -585,6 +606,7 @@ class Word2WordTrainer(Trainer):
                  momentum: float = 0.0,
                  wandb: wandb = None,
                  wandb_key: str = None,
+                 save_runs: bool = True,
                  base_path: str = None) -> None:
         """Create a Word2WordTrainer class.
 
@@ -617,7 +639,7 @@ class Word2WordTrainer(Trainer):
                          do_save=do_save, do_save_checkpoint=do_save_checkpoint, id=id,
                          do_shuffle=do_shuffle, split_ratio=split_ratio, optimizer=optimizer,
                          continue_from_checkpoint=continue_from_checkpoint, loss=loss,
-                         momentum=momentum, base_path=base_path, wandb=wandb)
+                         momentum=momentum, base_path=base_path, wandb=wandb, save_runs=save_runs)
         self.model = model
         self.dataset = load_dataset(self.id)
 
@@ -668,6 +690,7 @@ class Seq2LabelTrainer(Trainer):
         momentum (float, optional): Momentum value for optimizer. Defaults to 0.0.
         wandb (wandb, optional): Wandb class to track logs. Defaults to None.
         wandb_key (str, optional): Wandb api key. Defaults to None.
+        save_runs (bool, optional): If True save runs. Defaults to False.
         base_path (str, optional): Base path to save checkpoint and model. Defaults to None.
 
     See Also:
@@ -695,6 +718,7 @@ class Seq2LabelTrainer(Trainer):
                  momentum: float = 0.0,
                  wandb: wandb = None,
                  wandb_key: str = None,
+                 save_runs: bool = True,
                  base_path: str = None) -> None:
         """Create a Seq2LabelTrainer class.
 
@@ -718,6 +742,7 @@ class Seq2LabelTrainer(Trainer):
             momentum (float, optional): Momentum value for optimizer. Defaults to 0.0.
             wandb (wandb, optional): Wandb class to track logs. Defaults to None.
             wandb_key (str, optional): Wandb api key. Defaults to None.
+            save_runs (bool, optional): If True save runs. Defaults to False.
             base_path (str, optional): Base path to save checkpoint and model. Defaults to None.
         """
 
@@ -725,7 +750,7 @@ class Seq2LabelTrainer(Trainer):
                          print_every=print_every, do_eval=do_eval, hidden_size=hidden_size,
                          lr=lr, epochs=epochs, version=version, drop_out=drop_out,
                          do_save=do_save, do_save_checkpoint=do_save_checkpoint, id=id,
-                         do_shuffle=do_shuffle, optimizer=optimizer,
+                         do_shuffle=do_shuffle, optimizer=optimizer, save_runs=save_runs,
                          continue_from_checkpoint=continue_from_checkpoint, loss=loss,
                          momentum=momentum, base_path=base_path, wandb=wandb)
 
@@ -781,6 +806,7 @@ class TokenClassificationTrainer(Trainer):
         momentum (float, optional): Momentum value for optimizer. Defaults to 0.0.
         wandb (wandb, optional): Wandb class to track logs. Defaults to None.
         wandb_key (str, optional): Wandb api key. Defaults to None.
+        save_runs (bool, optional): If True save runs. Defaults to False.
         base_path (str, optional): Base path to save checkpoint and model. Defaults to None.
 
     See Also:
@@ -808,6 +834,7 @@ class TokenClassificationTrainer(Trainer):
                  momentum: float = 0.0,
                  wandb: wandb = None,
                  wandb_key: str = None,
+                 save_runs: bool = True,
                  base_path: str = None) -> None:
         """Create a TokenClassificationTrainer class.
 
@@ -838,7 +865,7 @@ class TokenClassificationTrainer(Trainer):
                          print_every=print_every, do_eval=do_eval, hidden_size=hidden_size,
                          lr=lr, epochs=epochs, version=version, drop_out=drop_out,
                          do_save=do_save, do_save_checkpoint=do_save_checkpoint, id=id,
-                         do_shuffle=do_shuffle, optimizer=optimizer,
+                         do_shuffle=do_shuffle, optimizer=optimizer, save_runs=save_runs,
                          continue_from_checkpoint=continue_from_checkpoint, loss=loss,
                          momentum=momentum, base_path=base_path, wandb=wandb)
 
@@ -895,6 +922,7 @@ class HybridXMLTrainer(Trainer):
         wandb (wandb, optional): Wandb class to track logs. Defaults to None.
         wandb_key (str, optional): Wandb api key. Defaults to None.
         base_path (str, optional): Base path to save checkpoint and model. Defaults to None.
+        save_runs (bool, optional): If True save runs. Defaults to False.
         multiclass (bool, optional): If True multiclass. Defaults to False.
 
     See Also:
@@ -922,6 +950,7 @@ class HybridXMLTrainer(Trainer):
                  momentum: float = 0.0,
                  wandb: wandb = None,
                  wandb_key: str = None,
+                 save_runs: bool = True,
                  multiclass: bool = False,
                  base_path: str = None) -> None:
         """[summary]
@@ -957,7 +986,7 @@ class HybridXMLTrainer(Trainer):
                          print_every=print_every, do_eval=do_eval, hidden_size=hidden_size,
                          lr=lr, epochs=epochs, version=version, drop_out=drop_out,
                          do_save=do_save, do_save_checkpoint=do_save_checkpoint, id=id,
-                         do_shuffle=do_shuffle, optimizer=optimizer,
+                         do_shuffle=do_shuffle, optimizer=optimizer, save_runs=save_runs,
                          continue_from_checkpoint=continue_from_checkpoint, loss=loss,
                          momentum=momentum, base_path=base_path, wandb=wandb)
 
@@ -1051,7 +1080,8 @@ class HybridXMLTrainer(Trainer):
             eval_iters = train['eval'][0]
             print_every = 0
 
-            eval_progress_bar = tqdm(range(eval_iters), desc=f'eval epoch {num_epoch}')
+            eval_progress_bar = tqdm(
+                range(eval_iters), desc=f'eval epoch {num_epoch}')
             for iter in eval_progress_bar:
                 eval_pair = train['eval'][1][iter]
                 input_tensor = eval_pair[0].to(DEVICE)
@@ -1074,7 +1104,8 @@ class HybridXMLTrainer(Trainer):
                     a = print_eval_acc_avg
                     lo = print_eval_loss_avg
 
-                    eval_progress_bar.set_postfix_str(f' val_acc : {a:.4f} val_loss : {lo:.4f}')
+                    eval_progress_bar.set_postfix_str(
+                        f' val_acc : {a:.4f} val_loss : {lo:.4f}')
 
                 print_every += 1
 

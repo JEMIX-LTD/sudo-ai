@@ -47,7 +47,7 @@ def load_config(model_name: str, version: str = '0.1.0'):
     return config
 
 
-def save_config(model, override=False):
+def save_config(model, override=False, is_local=False, folder_path=None):
 
     if model.__class__.__name__ == 'Word2Word':
         config = {
@@ -81,11 +81,14 @@ def save_config(model, override=False):
     else:
         raise ValueError('model not found !')
 
-    config_path = os.path.join(
-        datapath(model.name),
-        model.version,
-        'config.json'
-    )
+    if is_local and folder_path is not None:
+        config_path = os.path.join(folder_path, 'config.json')
+    else:
+        config_path = os.path.join(
+            datapath(model.name),
+            model.version,
+            'config.json'
+        )
 
     if override:
         if os.path.exists(config_path):
