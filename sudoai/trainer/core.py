@@ -21,6 +21,7 @@ from ..models.seq import Seq2Label
 from ..models.word import Word2Label, Word2Word
 from ..models.xmltc import HybridXMLTC
 from ..utils import DEVICE, load_checkpoint, load_dataset, save_checkpoint
+import torch
 
 
 class ModelError(Exception):
@@ -230,6 +231,8 @@ class Trainer():
             return self.steps(data, 1, hyperparam, log_history)
 
         for num_epoch in range(1, self.epochs + 1):
+            if DEVICE == 'cuda':
+                torch.cuda.synchronize()
             if log_history:
                 history.append(self.steps(
                     data, num_epoch, hyperparam, log_history))

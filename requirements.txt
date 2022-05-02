@@ -1,10 +1,8 @@
 torch
-sqlitedict
 tqdm
 ax-platform
 numpy
 fasttext
-requests
 wandb
 torchmetrics
 wget
