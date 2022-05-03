@@ -16,13 +16,16 @@ from datetime import datetime
 import wandb
 from tqdm.auto import tqdm
 
-from ..dataset import (DatasetError,  DatasetType)
+from ..dataset import (DatasetError,  DatasetType, CustomDataset)
 from ..models.seq import Seq2Label
 from ..models.word import Word2Label, Word2Word
 from ..models.xmltc import HybridXMLTC
 from ..utils import DEVICE, load_checkpoint, load_dataset, save_checkpoint
 import torch
 import uuid
+
+
+from torch.utils.data import DataLoader
 
 
 class ModelError(Exception):
@@ -151,6 +154,9 @@ class Trainer():
         self.wandb_key = wandb_key
         self.save_runs = save_runs
 
+        self.test_mode = False
+        self.num_workers = 1
+
     def save(self) -> str:
         """Save model with id and version.
 
@@ -160,7 +166,7 @@ class Trainer():
         path = self.model.save()
         sudoai.__log__.info(f'model {self.id} saved')
         return path
-    
+
     def save_local(self, run_id, epoch):
         self.model.local_save(run_id, epoch)
 
@@ -190,7 +196,8 @@ class Trainer():
         self.model.train()
         self.model.to(DEVICE)
         history = []
-        data = self.data_process(test_mode)
+
+        self.test_mode = test_mode
 
         if self.wandb is not None and isinstance(self.wandb, dict) and ('project' in self.wandb and 'entity' in self.wandb):
 
@@ -234,18 +241,46 @@ class Trainer():
                        config=config)
             wandb.watch(self.model, log="all")
 
+        if(self.test_mode):
+
+            t_dataset = CustomDataset(self.dataset.get_train(t=1000))
+            train = DataLoader(t_dataset,
+                               shuffle=self.do_shuffle,
+                               num_workers=self.num_workers,
+                               multiprocessing_context='spawn'
+                               )
+            v_dataset = CustomDataset(self.dataset.get_valid(t=200))
+            valid = DataLoader(v_dataset,
+                               shuffle=self.do_shuffle,
+                               num_workers=0
+                               )
+        else:
+
+            t_dataset = CustomDataset(self.dataset.train)
+            train = DataLoader(t_dataset,
+                               shuffle=self.do_shuffle,
+                               num_workers=self.num_workers,
+                               multiprocessing_context='spawn'
+                               )
+            v_dataset = CustomDataset(self.dataset.valid)
+            valid = DataLoader(v_dataset,
+                               shuffle=self.do_shuffle,
+                               num_workers=0
+                               )
+
         if hyperparam:
-            return self.steps(data, 1, hyperparam, log_history)
-        
-        run_id = str(uuid.uuid4()) 
+            return self.steps(train, valid, 1, hyperparam, log_history)
+
+        run_id = str(uuid.uuid4())
 
         for num_epoch in range(1, self.epochs + 1):
 
             if log_history:
                 history.append(self.steps(
-                    data, num_epoch, hyperparam, log_history))
+                    train, valid, num_epoch, hyperparam, log_history)
+                )
             else:
-                self.steps(data, num_epoch, hyperparam, log_history)
+                self.steps(train, valid, num_epoch, hyperparam, log_history)
             if self.do_save:
                 self.save()
 
@@ -290,11 +325,11 @@ class Trainer():
                 f'{pair[0]} = {pair[1]} |PREDICTION| {outputs}'
             )
 
-    def steps(self, train: dict, num_epoch: int = 1, hyperparam: bool = False, log_history: bool = False):
+    def steps(self, train, valid, num_epoch: int = 1, hyperparam: bool = False, log_history: bool = False):
         """Training steps
 
         Args:
-            train (dict): Dict with data for training and evaluation.
+
             num_epoch (int, optional): Current epoch number. Defaults to 1.
             hyperparam (bool, optional): If True enter Hypertuning mode. Defaults to False.
             log_history (bool, optional): If True log history. Defaults to False.
@@ -306,7 +341,7 @@ class Trainer():
         print_every = 0
         history = {'loss': {'train': [], 'eval': []},
                    'acc': {'train': [], 'eval': []}}
-        all_iters = train['train'][0] + train['eval'][0]
+        all_iters = len(self.dataset)
 
         eval_loss_avg = None
 
@@ -320,20 +355,15 @@ class Trainer():
                     f'checkpoint loaded epoch {epoch} loss {_loss} ')
             self.continue_from_checkpoint = None
 
-        if self.do_shuffle:
-            random.shuffle(train['train'][1])
-            # random.shuffle(train['eval'][1])
-
-        n_iters = train['train'][0]
-        progress_bar = tqdm(range(n_iters), desc=f'train epoch {num_epoch}')
+        progress_bar = tqdm(train, desc=f'train epoch {num_epoch}')
 
         if DEVICE == 'cuda':
             torch.cuda.synchronize()
 
         for iter in progress_bar:
-            training_pair = train['train'][1][iter]
-            input_tensor = training_pair[0].to(DEVICE)
-            target_tensor = training_pair[1].to(DEVICE)
+
+            input_tensor = iter[0][0]
+            target_tensor = iter[1][0]
 
             metrics = self.model(input_tensor,
                                  target_tensor,
@@ -366,14 +396,13 @@ class Trainer():
             len(history['acc']['train'])
 
         if self.do_eval:
-            eval_iters = train['eval'][0]
+
             print_every = 0
-            eval_progress_bar = tqdm(
-                range(eval_iters), desc=f'eval epoch {num_epoch}')
+            eval_progress_bar = tqdm(valid, desc=f'eval epoch {num_epoch}')
             for iter in eval_progress_bar:
-                eval_pair = train['eval'][1][iter]
-                input_tensor = eval_pair[0].to(DEVICE)
-                target_tensor = eval_pair[1].to(DEVICE)
+
+                input_tensor = iter[0][0]
+                target_tensor = iter[1][0]
 
                 metrics = self.model(input_tensor,
                                      target_tensor,
@@ -441,43 +470,6 @@ class Trainer():
         if log_history:
             return history
 
-    def data_process(self, test_mode: bool = False) -> dict:
-        """Process dataset.
-
-        Split data for training and evaluation.
-        Args:
-            test_mode (bool, optional): If True enter in test mode. Defaults to False.
-
-        Raises:
-            Exception: when dataset is too small.
-
-        Returns:
-            dict: Dict with data for training and evaluation.
-        """
-        training_pairs = self.dataset.train
-        eval_pairs = self.dataset.valid
-
-        if self.do_shuffle:
-            random.shuffle(training_pairs)
-
-        if test_mode:
-            if len(training_pairs) > 1000:
-                training_pairs = training_pairs[0:1000]
-            elif len(training_pairs) > 100:
-                training_pairs = training_pairs[0:100]
-            else:
-                raise Exception(
-                    'dataset is too small for test mode.'
-                )
-
-        iters = len(training_pairs)
-
-        if self.do_eval:
-            eval_iters = len(eval_pairs)
-            return {'train': [iters, training_pairs], 'eval': [eval_iters, eval_pairs]}
-
-        return {'train': [iters, training_pairs], 'eval': [0, []]}
-
     def save_checkpoint(self, num_epoch: int, train_loss_avg: float, eval_loss_avg: float = None) -> None:
         """Save checkpoint
 
@@ -539,6 +531,8 @@ class Trainer():
             test_mode = kwargs['test_mode']
         if 'log_history' in kwargs:
             log_history = kwargs['log_history']
+        if 'num_workers' in kwargs:
+            self.num_workers = kwargs['num_workers']
 
         return self.start(hyperparam, test_mode, log_history)
 

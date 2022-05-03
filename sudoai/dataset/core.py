@@ -30,6 +30,8 @@ import torch
 from tqdm.auto import tqdm
 import sudoai
 
+from torch.utils.data import Dataset as TorchDataset
+
 from ..preprocess import (CharTokenizer,
                           StopWord,
                           WordTokenizer,
@@ -422,7 +424,11 @@ class Dataset():
         Returns:
             int: Size of data.
         """
-        return len(self.data)
+
+        return len(self.train) + len(self.valid)
+
+    def size(self) -> dict:
+        return {'train': len(self.train), 'valid': len(self.valid)}
 
     def __getitem__(self, idx: int, plain: bool = False, val=False):
         """Get data from index.
@@ -577,7 +583,7 @@ class Dataset():
         elif self.info.data_type == DataType.CSV:
 
             data = pd.read_csv(self.info.train_path,
-                               encoding=self.info.encoding, 
+                               encoding=self.info.encoding,
                                sep=self.info.sep)
             data = data.iterrows()
             if self.info.verbose == 1:
@@ -591,7 +597,7 @@ class Dataset():
                 self.train.append(self.data_to_tensor(line))
 
             data = pd.read_csv(self.info.valid_path,
-                               encoding=self.info.encoding, 
+                               encoding=self.info.encoding,
                                sep=self.info.sep)
             data = data.iterrows()
             if self.info.verbose == 1:
@@ -686,7 +692,7 @@ class Dataset():
                         self.train_plain.append((text, label))
                         self.train.append((self.data_to_tensor(text),
                                           self.label_to_tensor(label)))
-            
+
             with open(self.info.valid_path, mode='r+b') as f:
                 with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as fm:
 
@@ -917,7 +923,7 @@ class Dataset():
 
                 self.train_plain.append((src, target))
                 self.train.append(self.data_to_tensor((src, target)))
-            
+
             data = pd.read_json(self.info.valid_path,
                                 encoding=self.info.encoding)
             data = data.iterrows()
@@ -989,3 +995,44 @@ class Dataset():
             int: Number of label classes.
         """
         return len(self.info.l2i)
+
+    def get_train(self, f=None, t=None):
+        if f is None and t is None:
+            return self.train
+        elif t is not None:
+            return self.train[:t]
+        elif f is not None:
+            return self.train[f:]
+        else:
+            return self.train[f:t]
+
+    def get_valid(self, f=None, t=None):
+        if f is None and t is None:
+            return self.valid
+
+        elif t is not None:
+            return self.valid[:t]
+        elif f is not None:
+            return self.valid[f:]
+        else:
+            return self.valid[f:t]
+
+    def set_device(self):
+        for x in range(self.size()['train']):
+            self.train[x] = (self.train[x][0].to(DEVICE),
+                             self.train[x][1].to(DEVICE))
+        for x in range(self.size()['valid']):
+            self.valid[x] = (self.valid[x][0].to(DEVICE),
+                             self.valid[x][1].to(DEVICE))
+
+
+class CustomDataset(TorchDataset):
+
+    def __init__(self, data):
+        self.data = data
+
+    def __getitem__(self, idx):
+        return self.data[idx]
+
+    def __len__(self):
+        return len(self.data)

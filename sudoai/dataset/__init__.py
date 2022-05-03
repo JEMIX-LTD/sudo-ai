@@ -35,11 +35,13 @@ from ..dataset.core import (
     DataType,
     DatasetInfo,
     Dataset,
-    DatasetType
+    DatasetType,
+    CustomDataset
 )
 
 __all__ = ['DatasetError',
            'DataType',
            'DatasetInfo',
            'DatasetType',
-           'Dataset']
+           'Dataset',
+           'CustomDataset']

@@ -32,7 +32,7 @@ SOFTWARE.
 
 import os
 import pickle
-from ..utils import datapath
+from ..utils import datapath, DEVICE
 from enum import Enum, unique
 
 import bz2
@@ -75,16 +75,21 @@ def load_dataset(id: str):
     if config['is_ziped']:
         if config['algo'] == ZipAlgo.LZMA:
             with lzma.open(dataset_path, 'rb') as f:
-                return pickle.load(f)
+                dataset = pickle.load(f)
         if config['algo'] == ZipAlgo.GZIP:
             with gzip.open(dataset_path, 'rb') as f:
-                return pickle.load(f)
+                dataset = pickle.load(f)
         if config['algo'] == ZipAlgo.BZ2:
             with bz2.open(dataset_path, 'rb') as f:
-                return pickle.load(f)
+                dataset = pickle.load(f)
     else:
         with open(dataset_path, 'rb') as f:
-            return pickle.load(f)
+            dataset = pickle.load(f)
+
+    if config['device'] != DEVICE:
+        dataset.set_device()
+    
+    return dataset
 
 
 def to_fasttext_format(in_path: str, out_path: str, sep='\t'):
@@ -110,7 +115,8 @@ def save_dataset_config(id: str, version: str, is_ziped: bool, algo: ZipAlgo = Z
         'id': id,
         'version': version,
         'is_ziped': is_ziped,
-        'algo': algo
+        'algo': algo,
+        'device': DEVICE
     }
 
     config_path = os.path.join(datapath(id), 'dataset_config.json')
