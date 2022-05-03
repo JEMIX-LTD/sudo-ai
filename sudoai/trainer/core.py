@@ -243,30 +243,36 @@ class Trainer():
 
         if(self.test_mode):
 
-            t_dataset = CustomDataset(self.dataset.get_train(t=1000))
-            train = DataLoader(t_dataset,
-                               shuffle=self.do_shuffle,
-                               num_workers=self.num_workers,
-                               multiprocessing_context='spawn'
-                               )
-            v_dataset = CustomDataset(self.dataset.get_valid(t=200))
-            valid = DataLoader(v_dataset,
-                               shuffle=self.do_shuffle,
-                               num_workers=0
-                               )
+            # t_dataset = CustomDataset(self.dataset.get_train(t=1000))
+            # train = DataLoader(t_dataset,
+            #                    shuffle=self.do_shuffle,
+            #                    num_workers=self.num_workers,
+            #                    multiprocessing_context='spawn'
+            #                    )
+            # v_dataset = CustomDataset(self.dataset.get_valid(t=200))
+            # valid = DataLoader(v_dataset,
+            #                    shuffle=self.do_shuffle,
+            #                    num_workers=0
+            #                    )
+
+            train = self.dataset.get_train(t=1000)
+            valid = self.dataset.get_valid(t=200)
         else:
 
-            t_dataset = CustomDataset(self.dataset.train)
-            train = DataLoader(t_dataset,
-                               shuffle=self.do_shuffle,
-                               num_workers=self.num_workers,
-                               multiprocessing_context='spawn'
-                               )
-            v_dataset = CustomDataset(self.dataset.valid)
-            valid = DataLoader(v_dataset,
-                               shuffle=self.do_shuffle,
-                               num_workers=0
-                               )
+            # t_dataset = CustomDataset(self.dataset.train)
+            # train = DataLoader(t_dataset,
+            #                    shuffle=self.do_shuffle,
+            #                    num_workers=self.num_workers,
+            #                    multiprocessing_context='spawn'
+            #                    )
+            # v_dataset = CustomDataset(self.dataset.valid)
+            # valid = DataLoader(v_dataset,
+            #                    shuffle=self.do_shuffle,
+            #                    num_workers=0
+            #                    )
+
+            train = self.dataset.train
+            valid = self.dataset.valid
 
         if hyperparam:
             return self.steps(train, valid, 1, hyperparam, log_history)
@@ -355,6 +361,9 @@ class Trainer():
                     f'checkpoint loaded epoch {epoch} loss {_loss} ')
             self.continue_from_checkpoint = None
 
+        if self.do_shuffle:
+            random.shuffle(train)
+
         progress_bar = tqdm(train, desc=f'train epoch {num_epoch}')
 
         if DEVICE == 'cuda':
@@ -362,8 +371,8 @@ class Trainer():
 
         for iter in progress_bar:
 
-            input_tensor = iter[0][0]
-            target_tensor = iter[1][0]
+            input_tensor = iter[0]
+            target_tensor = iter[1]
 
             metrics = self.model(input_tensor,
                                  target_tensor,
@@ -397,12 +406,15 @@ class Trainer():
 
         if self.do_eval:
 
+            if self.do_shuffle:
+                random.shuffle(valid)
+
             print_every = 0
             eval_progress_bar = tqdm(valid, desc=f'eval epoch {num_epoch}')
             for iter in eval_progress_bar:
 
-                input_tensor = iter[0][0]
-                target_tensor = iter[1][0]
+                input_tensor = iter[0]
+                target_tensor = iter[1]
 
                 metrics = self.model(input_tensor,
                                      target_tensor,
