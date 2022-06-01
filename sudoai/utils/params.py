@@ -205,4 +205,4 @@ EOC_CHAR = '>'
 # max number of words
 MAX_WORDS = 256
 # max number of chars in word
-MAX_LENGTH = 1000
+MAX_LENGTH = 40

@@ -23,6 +23,7 @@ import os
 import pickle
 from dataclasses import dataclass, field
 from enum import Enum, unique
+from re import L
 from typing import Dict
 
 import pandas as pd
@@ -31,6 +32,8 @@ from tqdm.auto import tqdm
 import sudoai
 
 from torch.utils.data import Dataset as TorchDataset
+
+from torch.utils.data import DataLoader
 
 from ..preprocess import (CharTokenizer,
                           StopWord,
@@ -994,7 +997,10 @@ class Dataset():
         Returns:
             int: Number of label classes.
         """
-        return len(self.info.l2i)
+        l = list(self.info.l2i.values())[0]
+        if type(l) == int:
+            return l
+        return len(list(self.info.l2i.values())[0])
 
     def get_train(self, f=None, t=None):
         if f is None and t is None:
@@ -1024,6 +1030,13 @@ class Dataset():
         for x in range(self.size()['valid']):
             self.valid[x] = (self.valid[x][0].to(DEVICE),
                              self.valid[x][1].to(DEVICE))
+
+    def get_dataloader(self, batch_size=None, shuffle=False):
+        train = DataLoader(CustomDataset(self.train),
+                           shuffle=shuffle, batch_size=batch_size)
+        valid = DataLoader(CustomDataset(self.valid),
+                           shuffle=shuffle, batch_size=batch_size)
+        return train, valid
 
 
 class CustomDataset(TorchDataset):

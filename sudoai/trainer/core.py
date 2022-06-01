@@ -16,16 +16,14 @@ from datetime import datetime
 import wandb
 from tqdm.auto import tqdm
 
-from ..dataset import (DatasetError,  DatasetType, CustomDataset)
+from ..dataset import DatasetError,  DatasetType
 from ..models.seq import Seq2Label
 from ..models.word import Word2Label, Word2Word
 from ..models.xmltc import HybridXMLTC
+from ..models.regression import LogisticRegression
 from ..utils import DEVICE, load_checkpoint, load_dataset, save_checkpoint
 import torch
 import uuid
-
-
-from torch.utils.data import DataLoader
 
 
 class ModelError(Exception):
@@ -271,8 +269,10 @@ class Trainer():
             #                    num_workers=0
             #                    )
 
-            train = self.dataset.train
-            valid = self.dataset.valid
+            # train = self.dataset.train
+            # valid = self.dataset.valid
+
+            train, valid = self.dataset.get_dataloader()
 
         if hyperparam:
             return self.steps(train, valid, 1, hyperparam, log_history)
@@ -361,8 +361,8 @@ class Trainer():
                     f'checkpoint loaded epoch {epoch} loss {_loss} ')
             self.continue_from_checkpoint = None
 
-        if self.do_shuffle:
-            random.shuffle(train)
+        # if self.do_shuffle:
+        #     random.shuffle(train)
 
         progress_bar = tqdm(train, desc=f'train epoch {num_epoch}')
 
@@ -406,8 +406,8 @@ class Trainer():
 
         if self.do_eval:
 
-            if self.do_shuffle:
-                random.shuffle(valid)
+            # if self.do_shuffle:
+            #     random.shuffle(valid)
 
             print_every = 0
             eval_progress_bar = tqdm(valid, desc=f'eval epoch {num_epoch}')
@@ -1092,6 +1092,207 @@ class HybridXMLTrainer(Trainer):
                 eval_pair = train['eval'][1][iter]
                 input_tensor = eval_pair[0].to(DEVICE)
                 target_tensor = eval_pair[1].to(DEVICE)
+
+                metrics = self.model(input_tensor,
+                                     target_tensor,
+                                     do_train=True)
+
+                history['loss']['eval'].append(metrics['loss'])
+                history['acc']['eval'].append(metrics['acc'])
+
+                if print_every == self.print_every:
+                    print_every = 0
+                    print_eval_loss_avg = sum(
+                        history['loss']['eval']) / len(history['loss']['eval'])
+                    print_eval_acc_avg = sum(
+                        history['acc']['eval']) / len(history['acc']['eval'])
+
+                    a = print_eval_acc_avg
+                    lo = print_eval_loss_avg
+
+                    eval_progress_bar.set_postfix_str(
+                        f' val_acc : {a:.4f} val_loss : {lo:.4f}')
+
+                print_every += 1
+
+            eval_loss_avg = sum(history['loss']['eval']) / \
+                len(history['loss']['eval'])
+
+            eval_acc_avg = sum(history['acc']['eval']) / \
+                len(history['acc']['eval'])
+            a = train_acc_avg
+            va = eval_acc_avg
+            lo = train_loss_avg
+            vlo = eval_loss_avg
+            sudoai.__log__.info(
+                f'steps : {all_iters} acc : {a:.4f} val_acc: {va:.4f}  loss : {lo:.4f}  val_loss : {vlo:.4f}')
+
+        else:
+            a = train_acc_avg
+            lo = train_loss_avg
+            sudoai.__log__.info(
+                f'steps : {all_iters} acc : {a:.4f} loss : {lo:.4f}')
+
+        self.save_checkpoint(num_epoch, train_loss_avg, eval_loss_avg)
+
+        if self.wandb is not None:
+            if self.do_eval:
+                wandb.log({"epoch": num_epoch,
+                           "acc": train_acc_avg,
+                           "val_acc": eval_acc_avg,
+                           "loss": train_loss_avg,
+                           "val_loss": eval_loss_avg})
+            else:
+                wandb.log({"epoch": num_epoch,
+                           "acc": train_acc_avg,
+                           "loss": train_loss_avg})
+
+        if hyperparam:
+            if self.do_eval:
+                return {"acc": train_acc_avg,
+                        "val_acc": eval_acc_avg,
+                        "loss": train_loss_avg,
+                        "val_loss": eval_loss_avg}
+
+            return {"acc": train_acc_avg, "loss": train_loss_avg}
+
+        if log_history:
+            return history
+
+
+class LogisticTrainer(Trainer):
+
+    def __init__(self,
+                 id: str,
+                 model:  LogisticRegression = None,
+                 version: str = '0.1.0',
+                 lr: float = 0.01,
+                 epochs: int = 2,
+                 do_eval: bool = False,
+                 do_shuffle: bool = False,
+                 do_save_checkpoint: bool = False,
+                 do_save: bool = True,
+                 continue_from_checkpoint: str = None,
+                 momentum: float = 0.0,
+                 wandb: wandb = None,
+                 wandb_key: str = None,
+                 save_runs: bool = True,
+                 base_path: str = None
+                 ) -> None:
+
+        super().__init__(id=id,
+                         version=version,
+                         lr=lr,
+                         epochs=epochs,
+                         wandb=wandb,
+                         wandb_key=wandb_key,
+                         do_eval=do_eval,
+                         do_shuffle=do_shuffle,
+                         do_save_checkpoint=do_save_checkpoint,
+                         continue_from_checkpoint=continue_from_checkpoint,
+                         momentum=momentum,
+                         do_save=do_save,
+                         save_runs=save_runs,
+                         base_path=base_path)
+
+        self.dataset = load_dataset(self.id)
+        self.model = model
+
+        self.n_class = self.dataset.n_class()
+
+        if self.model is None:
+            self.model = LogisticRegression(
+                name=self.id,
+                version=self.version,
+                momentum=self.momentum,
+                n_class=self.n_class,
+                learning_rate=self.learning_rate
+            )
+
+    def steps(self, train, valid, num_epoch: int = 1, hyperparam: bool = False, log_history: bool = False):
+        """Training steps
+
+        Args:
+
+            num_epoch (int, optional): Current epoch number. Defaults to 1.
+            hyperparam (bool, optional): If True enter Hypertuning mode. Defaults to False.
+            log_history (bool, optional): If True log history. Defaults to False.
+
+        Returns:
+            dict: accuracy and loss.
+            list: Log History.
+        """
+        print_every = 0
+        history = {'loss': {'train': [], 'eval': []},
+                   'acc': {'train': [], 'eval': []}}
+        all_iters = len(self.dataset)
+
+        eval_loss_avg = None
+
+        if self.continue_from_checkpoint is not None:
+            if not os.path.exists(self.continue_from_checkpoint):
+                sudoai.__log__.warning('checkpoint file not exist !')
+            else:
+                self.model, epoch, _loss = load_checkpoint(
+                    self.continue_from_checkpoint, self.model, True)
+                sudoai.__log__.info(
+                    f'checkpoint loaded epoch {epoch} loss {_loss} ')
+            self.continue_from_checkpoint = None
+
+        # if self.do_shuffle:
+        #     random.shuffle(train)
+
+        progress_bar = tqdm(train, desc=f'train epoch {num_epoch}')
+
+        if DEVICE == 'cuda':
+            torch.cuda.synchronize()
+
+        for iter in progress_bar:
+
+            input_tensor = iter[0].flatten().to(dtype=torch.float32)
+            target_tensor = iter[1].flatten().to(dtype=torch.float32)
+
+            metrics = self.model(input_tensor,
+                                 target_tensor,
+                                 do_train=True)
+
+            history['loss']['train'].append(metrics['loss'])
+            history['acc']['train'].append(metrics['acc'])
+
+            if print_every == self.print_every:
+                print_every = 0
+                print_loss_avg = sum(
+                    history['loss']['train']) / len(history['loss']['train'])
+                print_acc_avg = sum(
+                    history['acc']['train']) / len(history['acc']['train'])
+
+                a = print_acc_avg
+                lo = print_loss_avg
+
+                progress_bar.set_postfix_str(f'acc : {a:.4f} loss : {lo:.4f}')
+
+            print_every += 1
+
+        if DEVICE == 'cuda':
+            torch.cuda.synchronize()
+
+        train_loss_avg = sum(history['loss']['train']) / \
+            len(history['loss']['train'])
+
+        train_acc_avg = sum(history['acc']['train']) / \
+            len(history['acc']['train'])
+
+        if self.do_eval:
+
+            # if self.do_shuffle:
+            #     random.shuffle(valid)
+
+            print_every = 0
+            eval_progress_bar = tqdm(valid, desc=f'eval epoch {num_epoch}')
+            for iter in eval_progress_bar:
+
+                input_tensor = iter[0].flatten().to(dtype=torch.float32)
+                target_tensor = iter[1].flatten().to(dtype=torch.float32)
 
                 metrics = self.model(input_tensor,
                                      target_tensor,

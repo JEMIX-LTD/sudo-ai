@@ -48,7 +48,9 @@ from ..trainer.core import (
     Word2WordTrainer,
     Seq2LabelTrainer,
     TokenClassificationTrainer,
-    HybridXMLTrainer
+    HybridXMLTrainer,
+    LogisticTrainer,
+
 )
 
 __all__ = ['ModelError',
@@ -56,4 +58,5 @@ __all__ = ['ModelError',
            'Word2WordTrainer',
            'Seq2LabelTrainer',
            'TokenClassificationTrainer',
-           'HybridXMLTrainer']
+           'HybridXMLTrainer',
+           'LogisticTrainer']

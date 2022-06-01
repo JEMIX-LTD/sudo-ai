@@ -1,1 +1,1 @@
-{"vocab_size": 60, "n_class": 2, "hidden_size": 4, "version": "0.1.0", "name": "nsfw", "optimizer": "rmsprop", "loss": "nll", "learning_rate": 8.8e-05, "teacher_forcing_ratio": 0.5, "momentum": 0.51, "drop_out": 0.1}
+{"name": "nsfw", "version": "0.1.0", "momentum": 0.5, "n_class": 1, "learning_rate": 0.001}

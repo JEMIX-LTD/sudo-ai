@@ -78,6 +78,14 @@ def save_config(model, override=False, is_local=False, folder_path=None):
             'momentum': model.momentum,
             'drop_out': model.drop_out
         }
+    elif model.__class__.__name__ == 'LogisticRegression':
+        config = {
+            'name': model.name,
+            'version': model.version,
+            'momentum': model.momentum,
+            'n_class': model.n_class,
+            'learning_rate': model.learning_rate
+        }
     else:
         raise ValueError('model not found !')
 
@@ -154,6 +162,16 @@ def load_model(model: str,
             teacher_forcing_ratio=config['teacher_forcing_ratio'],
             momentum=config['momentum'],
             drop_out=config['drop_out']
+        )
+    elif model_type.__name__ == 'LogisticRegression':
+
+        model_result = model_type(
+            n_class=config['n_class'],
+            name=config['name'],
+            version=config['version'],
+            momentum=config['momentum'],
+            learning_rate=config['learning_rate']
+
         )
     else:
         raise Exception('model type not found !!')

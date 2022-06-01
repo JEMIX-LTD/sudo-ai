@@ -17,11 +17,15 @@ import fasttext
 
 from ..models.seq import Seq2Label
 from ..models.word import Word2Label, Word2Word
+from ..models.regression import LogisticRegression
 from ..utils import (InputOutput,
                      check_model,
                      datapath,
                      load_model,
                      load_tokenizer)
+
+from ..utils import DEVICE
+import torch
 
 
 class PipelineException(Exception):
@@ -55,6 +59,7 @@ class ModelType(str, Enum):
         SEQ_TO_LABEL (str): Seq2Label model (3).
         SEQ_TO_SEQ (str): For Seq2Seq model (4).
         FASTTEXT (str): FastText model (5).
+        LOG_REG (str): LogesticRegression model (6).
 
     """
     WORD_TO_LABEL: str = "1"
@@ -62,6 +67,7 @@ class ModelType(str, Enum):
     SEQ_TO_LABEL: str = "3"
     SEQ_TO_SEQ: str = "4"
     FASTTEXT: str = "5"
+    LOG_REG: str = "6"
 
 
 @dataclass
@@ -296,7 +302,10 @@ class Pipeline():
             return inputs
 
         if not self.config.is_two_tokenizer:
-            return self.tokenizer(inputs)
+            en = self.tokenizer(inputs)
+            if self.config.model_type == ModelType.LOG_REG:
+                en = en.flatten().to(dtype=torch.float32)
+            return en
         else:
             return self.src_tokenizer(inputs)
 
@@ -318,6 +327,41 @@ class Pipeline():
                 threshold = 0.0
 
             return predict_from_ft(self.model.predict(text=inputs, k=k, threshold=threshold))
+        if self.config.model_type == ModelType.LOG_REG:
+
+            if 'threshold' in self.kwargs:
+                threshold = self.kwargs['threshold']
+            else:
+                threshold = 0.5
+            
+            if 't' in self.kwargs:
+                t = self.kwargs['t']
+            else:
+                t = False
+
+            pred = self.model(inputs)
+
+            if t:
+                if pred.item() >= threshold:
+                    p = "1"
+                else:
+                    p = "0"
+                if self.config.i2l is not None:
+                    prd = self.config.i2l[p]
+                else:
+                    prd = p
+
+                return (prd, pred.item())
+
+            if float(pred) >= threshold:
+                pred = "1"
+            else:
+                pred = "0"
+            
+            if self.config.i2l is not None:
+                return self.config.i2l[pred]
+            
+            return pred
 
         if not self.config.is_two_tokenizer:
             output = self.model(inputs)
@@ -350,6 +394,8 @@ class Pipeline():
             return Seq2Label
         elif self.config.model_type == ModelType.WORD_TO_WORD:
             return Word2Word
+        elif self.config.model_type == ModelType.LOG_REG:
+            return LogisticRegression
 
         return None
 
