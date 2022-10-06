@@ -54,7 +54,7 @@ coverage.xml
 docs/_build/
 
 # PyBuilder
-target/
+
 
 # DotEnv configuration
 .env
