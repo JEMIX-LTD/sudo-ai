@@ -118,7 +118,6 @@ class Trainer():
             do_eval (bool, optional): If True evaluate. Defaults to False.
             do_save (bool, optional): If True save the model when training ends. Defaults to False.
             do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-            split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
             do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
             continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
             loss (str, optional): Loss function. Defaults to 'nll'.
@@ -575,7 +574,6 @@ class Word2WordTrainer(Trainer):
         do_eval (bool, optional): If True evaluate. Defaults to False.
         do_save (bool, optional): If True save the model when training ends. Defaults to False.
         do_shuffle (bool, optional): If True shuffle the dataset. Defaults to True.
-        split_ratio (float, optional): Split ratio (0.2 meaning 80% training and 20% validation). Defaults to 0.2.
         do_save_checkpoint (bool, optional): If True save checkpoint every epoch. Defaults to False.
         continue_from_checkpoint (str, optional): Path of checkpoint as start point. Defaults to None.
         loss (str, optional): Loss function. Defaults to 'nll'.
@@ -604,7 +602,6 @@ class Word2WordTrainer(Trainer):
                  do_eval: bool = False,
                  do_save: bool = False,
                  do_shuffle: bool = True,
-                 split_ratio: float = 0.2,
                  do_save_checkpoint: bool = False,
                  continue_from_checkpoint: str = None,
                  loss: str = 'nll',
@@ -643,7 +640,7 @@ class Word2WordTrainer(Trainer):
                          print_every=print_every, do_eval=do_eval, hidden_size=hidden_size,
                          lr=lr, epochs=epochs, version=version, drop_out=drop_out,
                          do_save=do_save, do_save_checkpoint=do_save_checkpoint, id=id,
-                         do_shuffle=do_shuffle, split_ratio=split_ratio, optimizer=optimizer,
+                         do_shuffle=do_shuffle, optimizer=optimizer,
                          continue_from_checkpoint=continue_from_checkpoint, loss=loss,
                          momentum=momentum, base_path=base_path, wandb=wandb, save_runs=save_runs)
         self.model = model

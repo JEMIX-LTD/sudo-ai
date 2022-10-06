@@ -34,7 +34,7 @@ class FastModel():
 
     def __init__(self,
                  id: str,
-                 train_path: str,
+                 train_path: str = None,
                  valid_path: str = None,
                  version: str = '0.1.0',
                  duration: int = 600,
@@ -243,7 +243,7 @@ class FastModel():
         if 'threshold' in kwargs:
             threshold = kwargs['threshold']
         else:
-            threshold = 0
+            threshold = 0.5
 
         if norm:
             return predict_from_ft(self.model.predict(_in, k, threshold))
