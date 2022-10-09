@@ -183,6 +183,7 @@ def token_hypertuning(dataset_id: str,
 def w2w_hypertuning(dataset_id: str,
                     n_experience: int = 30,
                     dataset_version: str = '0.1.0',
+                    parameters=None,
                     test_mode: bool = False):
     """Hyper tuning method for (word2word) model.
 
@@ -190,6 +191,7 @@ def w2w_hypertuning(dataset_id: str,
         dataset_id (str): Dataset unique id.
         n_experience (int, optional): Number of experiences. Defaults to 30.
         dataset_version (str, optional): Dataset version. Defaults to '0.1.0'.
+        parameters (list, optional): Parameters for hypertuning show ax platform.
         test_mode (bool, optional): Test mode to try with small amount of data. Defaults to False.
 
     Note:
@@ -214,10 +216,7 @@ def w2w_hypertuning(dataset_id: str,
             epochs=1
         )
         return trainer(hyperparam=True, test_mode=test_mode)
-
-    ax_client = AxClient()
-    ax_client.create_experiment(
-        name="ttd_torch_test_experiment",
+    if parameters is None:
         parameters=[
             {
                 "name": "learning_rate",
@@ -246,7 +245,15 @@ def w2w_hypertuning(dataset_id: str,
                 "type": "choice",
                 "values": ['adam', 'rmsprop'],
             },
-        ],
+        ]
+
+    ax_client = AxClient()
+
+
+
+    ax_client.create_experiment(
+        name="ttd_torch_test_experiment",
+        parameters=parameters,
         objective_name="val_loss",
         minimize=True,
     )
