@@ -41,6 +41,8 @@ from ..preprocess import (CharTokenizer,
                           convert_to_unicode)
 
 from ..utils import (DEVICE,
+                     EOC_CHAR , 
+                     SOC_CHAR ,
                      ZipAlgo,
                      datapath,
                      save_dataset_config,
@@ -396,7 +398,7 @@ class Dataset():
             `torch.Tensor`: Torch Tensor with tokens index.
         """
         if self.info.dataset_type == DatasetType.WORD_TO_WORD or self.info.dataset_type == DatasetType.SEQ_TO_SEQ:
-            return (self.src_token(data[0]), self.target_token(data[1]))
+            return (self.src_token( data[0]), self.target_token(data[1]))
         else:
             return self.token(data)
 
@@ -856,8 +858,11 @@ class Dataset():
                         if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                             continue
 
-                        self.train_plain.append((src, target))
-                        self.train.append(self.data_to_tensor((src, target)))
+                        src = src.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+                        target = target.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+
+                        self.train_plain.append((src + EOC_CHAR, target + EOC_CHAR))
+                        self.train.append(self.data_to_tensor((src + EOC_CHAR, target + EOC_CHAR)))
 
             with open(self.info.valid_path, mode='r+b') as f:
                 with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as fm:
@@ -877,8 +882,11 @@ class Dataset():
                         if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                             continue
 
-                        self.valid_plain.append((src, target))
-                        self.valid.append(self.data_to_tensor((src, target)))
+                        src = src.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+                        target = target.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+
+                        self.valid_plain.append((src + EOC_CHAR, target + EOC_CHAR))
+                        self.valid.append(self.data_to_tensor((src + EOC_CHAR , target + EOC_CHAR)))
 
         elif self.info.data_type == DataType.CSV:
             data = pd.read_csv(self.info.train_path,
@@ -893,8 +901,11 @@ class Dataset():
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
 
-                self.train_plain.append((src, target))
-                self.train.append(self.data_to_tensor((src, target)))
+                src = src.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+                target = target.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+
+                self.train_plain.append((src + EOC_CHAR, target + EOC_CHAR))
+                self.train.append(self.data_to_tensor((src + EOC_CHAR, target + EOC_CHAR)))
 
             data = pd.read_csv(self.info.valid_path,
                                encoding=self.info.encoding, sep=self.info.sep)
@@ -908,8 +919,11 @@ class Dataset():
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
 
-                self.valid_plain.append((src, target))
-                self.valid.append(self.data_to_tensor((src, target)))
+                src = src.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+                target = target.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+
+                self.valid_plain.append((src + EOC_CHAR, target + EOC_CHAR))
+                self.valid.append(self.data_to_tensor((src + EOC_CHAR, target + EOC_CHAR)))
 
         elif self.info.data_type == DataType.JSON:
             data = pd.read_json(self.info.train_path,
@@ -924,8 +938,11 @@ class Dataset():
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
 
-                self.train_plain.append((src, target))
-                self.train.append(self.data_to_tensor((src, target)))
+                src = src.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+                target = target.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+
+                self.train_plain.append((src + EOC_CHAR, target + EOC_CHAR))
+                self.train.append(self.data_to_tensor((src + EOC_CHAR , target + EOC_CHAR)))
 
             data = pd.read_json(self.info.valid_path,
                                 encoding=self.info.encoding)
@@ -939,8 +956,11 @@ class Dataset():
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
 
-                self.valid_plain.append((src, target))
-                self.valid.append(self.data_to_tensor((src, target)))
+                src = src.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+                target = target.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+
+                self.valid_plain.append((src + EOC_CHAR , target + EOC_CHAR))
+                self.valid.append(self.data_to_tensor((src + EOC_CHAR , target + EOC_CHAR)))
 
         elif self.info.data_type == DataType.EXCEL:
             data = pd.read_excel(self.info.train_path)
@@ -954,8 +974,11 @@ class Dataset():
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
 
-                self.train_plain.append((src, target))
-                self.train.append(self.data_to_tensor((src, target)))
+                src = src.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+                target = target.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+
+                self.train_plain.append((src + EOC_CHAR , target + EOC_CHAR))
+                self.train.append(self.data_to_tensor((src + EOC_CHAR , target + EOC_CHAR)))
 
             data = pd.read_excel(self.info.valid_path)
             data = data.iterrows()
@@ -967,9 +990,11 @@ class Dataset():
 
                 if len(src.split(' ')) >= self.info.max_length or len(target.split(' ')) >= self.info.max_length:
                     continue
+                src = src.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
+                target = target.translate(str.maketrans( {'\t': '', '\r': '', '\n': ''} ) )
 
-                self.valid_plain.append((src, target))
-                self.valid.append(self.data_to_tensor((src, target)))
+                self.valid_plain.append((src + EOC_CHAR , target + EOC_CHAR))
+                self.valid.append(self.data_to_tensor((src + EOC_CHAR , target + EOC_CHAR)))
 
     @classmethod
     def load(cls, id: str):
