@@ -31,7 +31,14 @@ SOFTWARE.
 
 import torch
 
-DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
+DEVICE = 'cpu'
+
+if torch.cuda.is_available():
+    DEVICE = 'cuda'
+elif torch.backends.mps.is_available():
+    DEVICE = 'mps'
+else:
+    DEVICE = 'cpu'
 
 
 ARABIC_PATTERN = r"[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FF0-9]+"

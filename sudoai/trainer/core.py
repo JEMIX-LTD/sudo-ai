@@ -367,6 +367,9 @@ class Trainer():
 
         if DEVICE == 'cuda':
             torch.cuda.synchronize()
+        
+        if DEVICE == 'mps':
+            torch.mps.synchronize()
 
         for iter in progress_bar:
 
@@ -396,6 +399,9 @@ class Trainer():
 
         if DEVICE == 'cuda':
             torch.cuda.synchronize()
+        
+        if DEVICE == 'mps':
+            torch.mps.synchronize()
 
         train_loss_avg = sum(history['loss']['train']) / \
             len(history['loss']['train'])
@@ -1243,6 +1249,9 @@ class LogisticTrainer(Trainer):
 
         if DEVICE == 'cuda':
             torch.cuda.synchronize()
+        
+        if DEVICE == 'mps':
+            torch.mps.synchronize()
 
         for iter in progress_bar:
 
@@ -1272,6 +1281,9 @@ class LogisticTrainer(Trainer):
 
         if DEVICE == 'cuda':
             torch.cuda.synchronize()
+        
+        if DEVICE == 'mps':
+            torch.mps.synchronize()
 
         train_loss_avg = sum(history['loss']['train']) / \
             len(history['loss']['train'])

@@ -1,1 +1,13 @@
-{"vocab_size": 43977, "n_class": 3, "hidden_size": 128, "version": "0.1.0", "name": "sa", "optimizer": "rmsprop", "loss": "crossentropy", "learning_rate": 0.0008, "teacher_forcing_ratio": 0.5, "momentum": 0.2, "drop_out": 0.1}
+{
+    "vocab_size": 43977,
+    "n_class": 3,
+    "hidden_size": 128,
+    "version": "0.1.0",
+    "name": "sa",
+    "optimizer": "rmsprop",
+    "loss": "crossentropy",
+    "learning_rate": 0.0008,
+    "teacher_forcing_ratio": 0.5,
+    "momentum": 0.2,
+    "drop_out": 0.1
+}

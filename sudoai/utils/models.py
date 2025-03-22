@@ -180,6 +180,9 @@ def load_model(model: str,
 
         model_result.load_state_dict(torch.load(
             model_path,  map_location=torch.device('cpu')))
+    elif DEVICE == 'mps':
+        model_result.load_state_dict(torch.load(
+            model_path,  map_location=torch.device('mps')))
     else:
         model_result.load_state_dict(torch.load(
             model_path,  map_location=torch.device('cuda')))
@@ -224,6 +227,8 @@ def load_checkpoint(path: str, model, do_train=True):
     """
     if DEVICE == 'cpu':
         checkpoint = torch.load(path, map_location=torch.device('cpu'))
+    elif DEVICE == 'mps':
+        checkpoint = torch.load(path, map_location=torch.device('mps'))
     else:
         checkpoint = torch.load(path, map_location=torch.device('cuda'))
 

@@ -1,9 +1,9 @@
-torch
+torch==2.1.0
 tqdm
 ax-platform
 numpy
 fasttext
-wandb
-torchmetrics
+wandb==0.12.20
+torchmetrics==0.8.0
 wget
 PyDrive

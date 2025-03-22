@@ -71,6 +71,7 @@ def load_dataset(id: str):
         raise FileNotFoundError(
             f'dataset not exist please check name ({id}) or version ({config["version"]})'
         )
+    dataset = None
 
     if config['is_ziped']:
         if config['algo'] == ZipAlgo.LZMA:

@@ -16,25 +16,26 @@ with open('requirements.txt') as f:
 
 setup(
     name="sudoai",
-    version="0.1.2",
+    version="0.1.3",
     author="Aymen Jemi",
     author_email="jemiaymen@gmail.com",
     description="AI Solution",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/suai-tn/sudo-ai",
+    url="https://github.com/JEMIX-LTD/sudo-ai",
     license='MIT',
     project_urls={
-        "Bug Tracker": "https://github.com/suai-tn/sudo-ai/issues",
+        "Bug Tracker": "https://github.com/JEMIX-LTD/sudo-ai/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    include_package_data=True,
     packages=find_packages(),
-    install_requires= requirements,
+    include_package_data=True,
+    py_modules=['sudoai'],
+    install_requires=requirements,
     extras_require={
         'reports': [
             "dash-daq==0.5.0",
